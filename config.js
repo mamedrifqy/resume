@@ -173,7 +173,7 @@ var config = {
             id: 'first-job',
             alignment: 'left',
             hidden: false,
-            title: 'FIRST JOB',
+            title: 'CURRENT JOB',
             subtitle: 'Mangrove Rehabilitation Technical Facilitator - PPIU M4CR Riau',
             sectiontitle: 'May 2024 - Now',
             image: 'https://mamedrifqy.github.io/resume/assets/Logo_M4CR_2024.png',
