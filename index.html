@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset='utf-8' />
     <title>Med's Resumé</title>
@@ -9,1155 +9,781 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css' rel='stylesheet' />
     <script src="https://unpkg.com/intersection-observer@0.12.0/intersection-observer.js"></script>
     <script src="https://unpkg.com/scrollama"></script>
-    <link href="https://fonts.googleapis.com/css?family=Outfit:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i | Crimson+Text: 300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin:0;
-            padding:0;
-            font-family: 'Outfit';
+        :root {
+            --navy:#0f1f3d; --teal:#1a6b6b; --teal-lt:#2a9090;
+            --cream:#f7f3ec; --cream-dk:#ede8df;
+            --amber:#c97c2e; --text:#1e2a3a; --muted:#5a6a7a;
+            --card-bg:rgba(247,243,236,0.97);
+            --shadow:0 8px 32px rgba(15,31,61,0.14),0 2px 8px rgba(15,31,61,0.07);
+            --shadow-h:0 18px 52px rgba(15,31,61,0.20),0 4px 14px rgba(15,31,61,0.10);
+            --radius:16px;
         }
-        a, a:hover, a:visited {
-            color: #0071bc;
-        }
-        #map {
-            top:0;
-            height: 100vh;
-            width:100vw;
-            position: fixed;
-        }
-        #mapInset {
-            bottom:50px;
-            right:30px;
-            height: 180px;
-            width:250px;
-            max-width:100%;
-            position: fixed;
-            z-index: 1;
-            opacity: 1;
-            transition: opacity 0.5s ease-in-out;
-            pointer-events: none;
-        }
-        #mapInset .mapboxgl-ctrl-bottom-left{
-            display: none;
-        }
-        @media (max-width: 500px) {
-            #mapInset {
-                display: none;
-            }
-        }
-        #header {
-            border-radius: 0px 0px 15px 15px;
-            margin: auto;
-            width: 80%;
-            position: relative;
-            z-index: 5;
+        *,*::before,*::after{box-sizing:border-box;}
+        body{margin:0;padding:0;font-family:'DM Sans',sans-serif;background:#0f1f3d;color:var(--text);}
 
+        /* MAP */
+        #map{top:0;height:100vh;width:100vw;position:fixed;z-index:0;}
+
+        /* INSET MAP */
+        #inset-container{position:fixed;bottom:24px;right:24px;z-index:10;display:flex;flex-direction:column;align-items:flex-end;}
+        #inset-toggle{
+            background:rgba(15,31,61,0.88);border:1px solid rgba(255,255,255,0.2);
+            color:rgba(255,255,255,0.8);font-size:11px;font-weight:600;letter-spacing:0.07em;
+            padding:4px 12px 4px 10px;border-radius:99px 99px 0 0;cursor:pointer;
+            display:flex;align-items:center;gap:5px;transition:background 0.2s;border-bottom:none;
+            backdrop-filter:blur(8px);
         }
-        #header h1, #header h2, #header p {
-            margin: 0;
-            padding: 2vh 2vw;
-            text-align: center;
+        #inset-toggle:hover{background:rgba(42,144,144,0.5);}
+        #inset-toggle .arrow{font-size:9px;transition:transform 0.3s;display:inline-block;}
+        #inset-toggle.collapsed .arrow{transform:rotate(180deg);}
+        #mapInset{
+            height:160px;width:220px;opacity:1;pointer-events:none;
+            border-radius:0 0 10px 10px;overflow:hidden;
+            box-shadow:0 4px 18px rgba(0,0,0,0.4);
+            border:1px solid rgba(255,255,255,0.18);border-top:none;
+            transition:height 0.35s cubic-bezier(0.4,0,0.2,1),opacity 0.35s ease;
         }
-        #footer {
-            border-radius: 15px 15px 0px 0px;
-            width: 100%;
-            min-height: 5vh;
-            padding-top: 2vh;
-            padding-bottom: 2vh;
-            text-align: center;
-            line-height: 25px;
-            font-size: 13px;
-            position: relative;
-            z-index: 5;
+        #mapInset.hidden-inset{height:0;opacity:0;}
+        #mapInset .mapboxgl-ctrl-bottom-left{display:none;}
+        @media(max-width:600px){#inset-container{display:none;}}
+
+        /* PROGRESS NAV */
+        #progress-nav{
+            position:fixed;top:0;left:0;right:0;z-index:200;height:52px;
+            background:rgba(15,31,61,0.92);
+            backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+            border-bottom:1px solid rgba(255,255,255,0.09);
+            display:flex;align-items:center;padding:0 20px;gap:12px;
         }
-        #features {
-            border-radius: 15px;
-            padding-top: 10vh;
-            padding-bottom: 10vh;
+        #progress-nav .nav-name{font-family:'DM Serif Display',serif;font-size:15px;color:rgba(255,255,255,0.92);white-space:nowrap;flex-shrink:0;}
+        #progress-nav .nav-sep{color:rgba(255,255,255,0.2);flex-shrink:0;}
+        #progress-nav .nav-section{font-size:11px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--amber);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;}
+        #nav-toggle-btn{
+            margin-left:auto;flex-shrink:0;background:rgba(255,255,255,0.1);
+            border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.82);
+            font-size:12px;font-weight:600;letter-spacing:0.06em;
+            padding:5px 14px;border-radius:99px;cursor:pointer;
+            display:flex;align-items:center;gap:6px;transition:background 0.2s;
         }
-        .hidden {
-            visibility: hidden;
+        #nav-toggle-btn:hover{background:rgba(255,255,255,0.18);}
+
+        /* DROPDOWN NAV */
+        #nav-panel{
+            position:fixed;top:52px;left:0;right:0;z-index:190;
+            background:rgba(12,24,48,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+            border-bottom:1px solid rgba(255,255,255,0.1);
+            padding:16px 24px 20px;display:none;flex-wrap:wrap;gap:6px;
+            max-height:calc(100vh - 52px);overflow-y:auto;
         }
-        .centered {
-            width: 50vw;
-            margin: 0 auto;
+        #nav-panel.open{display:flex;}
+        .nav-panel-label{width:100%;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:6px;}
+        .nav-panel-group{display:flex;flex-wrap:wrap;gap:6px;width:100%;}
+        .nav-panel a{
+            display:inline-flex;align-items:center;gap:5px;
+            background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+            color:rgba(255,255,255,0.78);font-size:12px;font-weight:500;
+            padding:6px 14px;border-radius:99px;cursor:pointer;text-decoration:none;
+            transition:background 0.18s,color 0.18s;
         }
-        .lefty {
-            width: 33vw;
-            margin-left: 5vw;
+        .nav-panel a:hover{background:rgba(42,144,144,0.3);color:#fff;border-color:var(--teal-lt);}
+        .nav-panel a.active-link{background:var(--teal);color:#fff;border-color:var(--teal);}
+
+        /* PROGRESS BAR */
+        #progress-bar-track{position:fixed;top:52px;left:0;right:0;z-index:195;height:3px;background:rgba(255,255,255,0.06);}
+        #progress-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--teal),var(--amber));transition:width 0.45s ease;}
+
+        /* STORY */
+        #story{position:relative;z-index:5;padding-top:52px;}
+
+        /* HEADER */
+        #header{position:relative;z-index:5;padding:70px 20px 52px;text-align:center;}
+        .header-inner{
+            display:inline-block;background:var(--card-bg);border-radius:var(--radius);
+            padding:40px 48px 36px;max-width:680px;width:100%;
+            box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.55);
+            position:relative;overflow:hidden;
         }
-        .righty {
-            width: 33vw;
-            margin-left: 62vw;
+        .header-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--navy),var(--teal),var(--amber));}
+        .coord-badge{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:rgba(255,255,255,0.6);font-size:11px;font-weight:500;letter-spacing:0.06em;padding:4px 12px;border-radius:99px;margin-bottom:20px;}
+        .coord-badge::before{content:'◉';color:var(--amber);font-size:9px;}
+        .header-inner h1{margin:0 0 8px;font-family:'DM Serif Display',serif;font-size:clamp(22px,4vw,36px);color:var(--navy);line-height:1.15;}
+        .header-inner h2{margin:0 0 14px;font-size:13px;font-weight:400;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;}
+        .header-inner p{margin:0;font-size:13px;color:var(--muted);}
+
+        /* FEATURES */
+        #features{padding-top:6vh;padding-bottom:10vh;}
+
+        /* STEPS */
+        .step{padding-bottom:58vh;opacity:0;transform:translateY(22px);transition:opacity 0.55s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);}
+        .step.active{opacity:1;transform:translateY(0);}
+        .step > div.chapter-content{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.55);overflow:hidden;transition:box-shadow 0.3s ease;position:relative;}
+        .step.active > div.chapter-content{box-shadow:var(--shadow-h);}
+        .step > div.chapter-content::before{content:'';display:block;width:100%;height:3px;}
+        .step.type-center > div.chapter-content::before{background:linear-gradient(90deg,var(--navy),var(--teal));}
+        .step.type-side   > div.chapter-content::before{background:linear-gradient(90deg,var(--teal),var(--teal-lt));}
+        .step.type-full   > div.chapter-content::before{background:linear-gradient(90deg,var(--amber),var(--teal));}
+        .card-body{padding:22px 28px 26px;line-height:1.7;font-size:14px;color:var(--text);}
+        @media(max-width:600px){.card-body{padding:18px 16px;}}
+
+        /* COORD BADGE IN CARDS */
+        .card-coord{display:inline-flex;align-items:center;gap:5px;background:rgba(15,31,61,0.07);color:var(--muted);font-size:10px;font-weight:600;letter-spacing:0.06em;padding:3px 10px;border-radius:99px;margin-bottom:12px;border:1px solid rgba(15,31,61,0.1);}
+
+        /* TYPOGRAPHY */
+        .step h1{font-family:'DM Serif Display',serif;font-size:clamp(17px,2.4vw,23px);color:var(--navy);margin:0 0 4px;line-height:1.2;}
+        .step h2{font-size:13px;font-weight:500;color:var(--teal);margin:0 0 3px;}
+        .step h3{font-size:10px;font-weight:700;color:var(--amber);letter-spacing:0.12em;text-transform:uppercase;margin:0 0 12px;display:flex;align-items:center;gap:5px;}
+        .step h3::before{content:'◆';font-size:7px;}
+
+        /* DIVIDER */
+        .divider-card{
+            background:rgba(10,20,45,0.82) !important;backdrop-filter:blur(12px) !important;-webkit-backdrop-filter:blur(12px) !important;
+            box-shadow:none !important;border:none !important;border-radius:0 !important;
+            padding:52px 24px 44px !important;text-align:center;
         }
-        .fully {
-            border-radius: 0px;
-            width: 100%;
-            text-align: center;
+        .divider-card::before{display:none !important;}
+        .divider-card h1{color:rgba(255,255,255,0.97) !important;font-size:clamp(22px,3.5vw,38px) !important;text-transform:uppercase !important;letter-spacing:0.16em !important;margin:0 0 10px !important;text-shadow:0 2px 20px rgba(0,0,0,0.5);}
+        .divider-card p{color:rgba(255,255,255,0.55) !important;font-size:13px !important;margin:0 !important;}
+        .scroll-hint-label{display:inline-block;margin-top:14px;font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;}
+        .divider-accent{width:48px;height:3px;background:linear-gradient(90deg,var(--teal),var(--amber));border-radius:99px;margin:14px auto 0;}
+
+        /* IMAGE */
+        .img-frame{overflow:hidden;max-height:220px;}
+        .img-frame img{width:100%;display:block;object-fit:cover;height:100%;transition:transform 0.7s ease;}
+        .step.active .img-frame img{transform:scale(1.03);}
+
+        /* ROLE TAG */
+        .role-tag{font-size:11px !important;font-weight:700 !important;color:var(--teal) !important;letter-spacing:0.08em !important;text-transform:uppercase !important;margin:0 0 10px !important;}
+        .contact-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;}
+        .contact-row a{font-size:11px;color:var(--muted);background:rgba(26,107,107,0.08);border:1px solid rgba(26,107,107,0.2);padding:3px 10px;border-radius:99px;text-decoration:none;}
+        .contact-row a:hover{color:var(--teal);}
+
+        /* SKILL BADGES */
+        .skill-groups{display:flex;flex-direction:column;gap:10px;}
+        .skill-group{display:flex;flex-direction:column;gap:5px;}
+        .sg-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+        .skill-row{display:flex;flex-wrap:wrap;gap:5px;}
+        .skill-badge{display:inline-flex;align-items:center;gap:3px;background:rgba(26,107,107,0.08);color:var(--teal);border:1px solid rgba(26,107,107,0.2);border-radius:99px;font-size:11px;font-weight:600;padding:3px 10px;letter-spacing:0.04em;text-transform:uppercase;}
+        .skill-badge::before{content:'▸';font-size:8px;}
+
+        /* ── VERTICAL TABS ── */
+        .vtab-wrap{display:flex;gap:0;min-height:200px;border-radius:10px;overflow:hidden;border:1px solid var(--cream-dk);}
+        .vtab-nav{
+            display:flex;flex-direction:column;
+            background:rgba(15,31,61,0.05);
+            border-right:1px solid var(--cream-dk);
+            flex-shrink:0;width:140px;
         }
-        .light {
-            border-radius: 15px;
-            color: #444;
-            background-color: #fafafa;
-            background-image: url('https://mamedrifqy.github.io/assets/img/background.png');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: 100% 100%;
+        .vtab-btn{
+            display:flex;flex-direction:column;align-items:flex-start;
+            padding:14px 14px 14px 16px;
+            background:transparent;border:none;cursor:pointer;
+            border-bottom:1px solid var(--cream-dk);
+            text-align:left;position:relative;
+            transition:background 0.18s;
+            gap:2px;
         }
-        .dark {
-            color: #fafafa;
-            background-color: #3256a8;
-        }
-        .step {
-            padding-bottom: 50vh;
-            /* margin-bottom: 10vh; */
-            opacity: 0.25;
-        }
-        .step.active {
-            opacity: 0.9;
+        .vtab-btn:last-child{border-bottom:none;}
+        .vtab-btn:hover{background:rgba(26,107,107,0.07);}
+        .vtab-btn.active{background:rgba(26,107,107,0.12);}
+        .vtab-btn.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--teal);}
+        .vtab-year{font-size:10px;font-weight:700;color:var(--amber);letter-spacing:0.06em;}
+        .vtab-name{font-size:11px;font-weight:600;color:var(--navy);line-height:1.3;}
+        .vtab-active-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);margin-top:3px;}
+        .vtab-content{flex:1;overflow:hidden;min-width:0;}
+        .vtab-panel{display:none;padding:16px 18px;animation:fadeIn 0.25s ease;}
+        .vtab-panel.active{display:block;}
+        @keyframes fadeIn{from{opacity:0;transform:translateX(6px)}to{opacity:1;transform:translateX(0)}}
+
+        /* vtab header row */
+        .vt-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px;}
+        .vt-header > div{flex:1;min-width:0;}
+        .edu-gpa{font-size:11px;font-weight:700;color:var(--teal);background:rgba(26,107,107,0.1);border:1px solid rgba(26,107,107,0.2);padding:3px 8px;border-radius:99px;white-space:nowrap;flex-shrink:0;}
+        .tl-inst{font-weight:700;font-size:14px;color:var(--navy);line-height:1.3;}
+        .tl-loc{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px;}
+        .tl-deg{font-size:12px;color:var(--teal);margin:4px 0 4px;line-height:1.4;font-weight:500;}
+        .tl-period{font-size:10px;font-weight:700;color:var(--amber);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:4px;}
+        .tl-period::before{content:'◆';font-size:7px;}
+        .vtab-panel ul{padding-left:16px;margin:0;}
+        .vtab-panel ul li{font-size:12px;color:var(--text);margin-bottom:4px;line-height:1.55;}
+        @media(max-width:600px){
+            .vtab-wrap{flex-direction:column;}
+            .vtab-nav{width:100%;flex-direction:row;border-right:none;border-bottom:1px solid var(--cream-dk);overflow-x:auto;}
+            .vtab-btn{flex-direction:row;gap:8px;border-bottom:none;border-right:1px solid var(--cream-dk);white-space:nowrap;}
+            .vtab-btn:last-child{border-right:none;}
+            .vtab-btn.active::before{width:100%;height:3px;top:auto;bottom:0;left:0;}
         }
 
-        .step div {
-            padding:  25px 50px;
-            line-height: 25px;
-            font-size: 13px;
-        }
+        /* LOC BUTTON */
+        .loc-btn{width:22px;height:22px;background:rgba(26,107,107,0.1);border:1px solid rgba(26,107,107,0.25);border-radius:50%;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:11px;transition:background 0.2s,transform 0.2s;vertical-align:middle;}
+        .loc-btn:hover{background:rgba(26,107,107,0.25);transform:scale(1.1);}
+        .loc-btn.active-loc{background:var(--teal);border-color:var(--teal);}
 
-        .step img {
-            width: 100%;
-        }
+        /* TIMELINE (for awards) */
+        .tl-wrap{display:flex;flex-direction:column;}
+        .tl-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--cream-dk);}
+        .tl-item:last-child{border-bottom:none;padding-bottom:0;}
+        .tl-dot-col{display:flex;flex-direction:column;align-items:center;flex-shrink:0;padding-top:4px;min-width:14px;}
+        .tl-dot{width:10px;height:10px;border-radius:50%;background:var(--cream-dk);border:2px solid var(--teal-lt);flex-shrink:0;}
+        .tl-dot.active-dot{background:var(--teal);border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,107,107,0.2);}
+        .tl-line{flex:1;width:2px;background:var(--cream-dk);margin-top:5px;min-height:20px;}
+        .tl-body{flex:1;min-width:0;}
 
-        @media (max-width: 750px) {
-            .centered, .lefty, .righty, .fully {
-                width: 90vw;
-                margin: 0 auto;
-            }
+        /* ── SHOWCASE GRID ── */
+        .showcase-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px;}
+        @media(max-width:600px){.showcase-grid{grid-template-columns:1fr;}}
+        .showcase-card{
+            border-radius:12px;overflow:hidden;
+            border:1px solid var(--cream-dk);
+            background:#fff;
+            cursor:pointer;
+            transition:transform 0.25s ease,box-shadow 0.25s ease;
+            box-shadow:0 2px 10px rgba(15,31,61,0.08);
         }
+        .showcase-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(15,31,61,0.15);}
+        .showcase-thumb{position:relative;height:120px;overflow:hidden;}
+        .showcase-map-preview{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative;}
+        .sc-map-grid{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.06) 0,rgba(255,255,255,0.06) 1px,transparent 1px,transparent 32px),repeating-linear-gradient(90deg,rgba(255,255,255,0.06) 0,rgba(255,255,255,0.06) 1px,transparent 1px,transparent 32px);}
+        .sc-map-icon{font-size:28px;position:relative;z-index:1;}
+        .sc-map-label{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);position:relative;z-index:1;}
+        .showcase-hover-overlay{
+            position:absolute;inset:0;
+            background:rgba(15,31,61,0.72);
+            display:flex;align-items:center;justify-content:center;
+            opacity:0;transition:opacity 0.25s ease;
+        }
+        .showcase-card:hover .showcase-hover-overlay{opacity:1;}
+        .sc-open-btn{
+            background:var(--teal);color:#fff;
+            font-size:12px;font-weight:700;letter-spacing:0.06em;
+            padding:8px 18px;border-radius:99px;
+            display:flex;align-items:center;gap:6px;
+        }
+        .showcase-info{padding:12px 14px 14px;}
+        .showcase-tag{font-size:10px;font-weight:700;color:var(--amber);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;}
+        .showcase-title{font-weight:700;font-size:14px;color:var(--navy);margin-bottom:5px;font-family:'DM Serif Display',serif;}
+        .showcase-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:8px;}
+        .showcase-stack{display:flex;flex-wrap:wrap;gap:4px;}
+        .sc-pill{font-size:10px;background:rgba(15,31,61,0.07);color:var(--navy);border-radius:99px;padding:2px 8px;font-weight:500;}
 
-        /* Fix issue on mobile browser where scroll breaks  */
+        /* ── SHOWCASE MODAL ── */
+        #showcase-modal{
+            position:fixed;inset:0;z-index:1000;
+            background:rgba(10,18,40,0.92);
+            backdrop-filter:blur(8px);
+            display:none;flex-direction:column;
+            animation:modalIn 0.3s ease;
+        }
+        #showcase-modal.open{display:flex;}
+        @keyframes modalIn{from{opacity:0;transform:scale(0.97)}to{opacity:1;transform:scale(1)}}
+        #modal-bar{
+            display:flex;align-items:center;justify-content:space-between;
+            padding:10px 20px;
+            background:rgba(15,31,61,0.95);
+            border-bottom:1px solid rgba(255,255,255,0.1);
+            flex-shrink:0;
+        }
+        #modal-title-area{display:flex;flex-direction:column;gap:2px;}
+        #modal-title{font-family:'DM Serif Display',serif;font-size:15px;color:rgba(255,255,255,0.92);}
+        #modal-subtitle{font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:0.06em;}
+        #modal-actions{display:flex;align-items:center;gap:10px;}
+        #modal-open-btn{
+            background:var(--teal);color:#fff;
+            font-size:11px;font-weight:600;letter-spacing:0.05em;
+            padding:5px 14px;border-radius:99px;text-decoration:none;
+            border:none;cursor:pointer;
+            transition:background 0.2s;
+        }
+        #modal-open-btn:hover{background:var(--teal-lt);}
+        #modal-close-btn{
+            width:32px;height:32px;border-radius:50%;
+            background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+            color:rgba(255,255,255,0.8);font-size:16px;cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            transition:background 0.2s;
+        }
+        #modal-close-btn:hover{background:rgba(255,255,255,0.2);}
+        #modal-iframe-wrap{flex:1;overflow:hidden;position:relative;}
+        #modal-loading{
+            position:absolute;inset:0;
+            display:flex;flex-direction:column;align-items:center;justify-content:center;
+            background:rgba(10,18,40,0.9);gap:14px;
+            z-index:2;transition:opacity 0.4s;
+        }
+        #modal-loading.done{opacity:0;pointer-events:none;}
+        .loading-spinner{width:36px;height:36px;border:3px solid rgba(42,144,144,0.3);border-top-color:var(--teal);border-radius:50%;animation:spin 0.9s linear infinite;}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        #modal-loading p{font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:0.06em;}
+        #showcase-iframe{width:100%;height:100%;border:none;display:block;}
+
+        /* COURSES */
+        .courses-grid{display:flex;flex-direction:column;gap:7px;margin-top:4px;}
+        .course-item{display:flex;gap:12px;align-items:flex-start;padding:9px 12px;background:rgba(26,107,107,0.06);border-radius:9px;border-left:3px solid var(--teal);}
+        .course-year{font-size:11px;font-weight:800;color:var(--amber);letter-spacing:0.06em;flex-shrink:0;padding-top:1px;}
+        .course-name{font-size:12px;font-weight:500;color:var(--text);line-height:1.4;}
+        .course-org{font-size:11px;color:var(--muted);margin-top:2px;}
+
+        /* PUBLICATIONS */
+        .pub-card{padding:14px;background:rgba(15,31,61,0.04);border-radius:10px;border-left:3px solid var(--navy);}
+        .pub-type{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);background:rgba(201,124,46,0.1);padding:2px 8px;border-radius:99px;display:inline-block;margin-bottom:5px;}
+        .pub-journal{font-size:11px;color:var(--teal);font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:5px;}
+        .pub-title{font-size:13px;font-weight:600;color:var(--navy);line-height:1.45;}
+        .pub-doi{font-size:11px;color:var(--muted);margin-top:6px;}
+        .pub-doi a{color:var(--teal);}
+
+        /* AWARDS */
+        .awards-row{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+        .award-item{display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:rgba(201,124,46,0.07);border-radius:9px;border-left:3px solid var(--amber);}
+        .award-year{font-size:11px;font-weight:800;color:var(--amber);flex-shrink:0;padding-top:2px;}
+        .award-title{font-size:13px;font-weight:600;color:var(--navy);}
+        .award-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+        .section-divider-mini{height:1px;background:var(--cream-dk);margin:14px 0;}
+
+        /* CTA */
+        .cta-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px;}
+        .cta-btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 24px;border-radius:99px;text-decoration:none;transition:all 0.2s;border:2px solid transparent;}
+        .cta-primary{background:var(--teal);color:#fff;border-color:var(--teal);}
+        .cta-primary:hover{background:var(--teal-lt);border-color:var(--teal-lt);color:#fff;text-decoration:none;}
+        .cta-secondary{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.9);border-color:rgba(255,255,255,0.3);}
+        .cta-secondary:hover{background:var(--amber);border-color:var(--amber);color:#fff;text-decoration:none;}
+
+        /* GENERAL */
+        .step p{margin:10px 0 0;}
+        .step ul{padding-left:18px;margin:6px 0;}
+        .step ul li{margin-bottom:5px;font-size:13px;line-height:1.6;}
+        a{color:var(--teal);font-weight:500;text-decoration:none;}
+        a:hover{color:var(--amber);text-decoration:underline;}
+
+        /* LAYOUT */
+        .lefty{width:36vw;margin-left:5vw;}
+        .righty{width:36vw;margin-left:59vw;}
+        .centered{width:44vw;margin:0 auto;}
+        .fully{width:100%;}
+        .fully > div.chapter-content{border-radius:0 !important;}
+        .hidden{visibility:hidden;}
+        @media(max-width:750px){.centered,.lefty,.righty,.fully{width:92vw !important;margin:0 auto !important;}}
+
+        /* FOOTER */
+        #footer{width:100%;padding:26px 20px;text-align:center;font-size:12px;color:rgba(255,255,255,0.42);background:rgba(15,31,61,0.9);backdrop-filter:blur(8px);position:relative;z-index:5;line-height:1.9;}
+        #footer a{color:rgba(255,255,255,0.6);}
+        #footer a:hover{color:var(--amber);}
+
+        /* SCROLL HINT */
+        #scroll-hint{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:1;transition:opacity 0.7s;pointer-events:none;}
+        #scroll-hint.gone{opacity:0;}
+        #scroll-hint span{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);}
+        .hint-arrow{width:28px;height:28px;border:1.5px solid rgba(255,255,255,0.35);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:bob 1.9s ease-in-out infinite;}
+        .hint-arrow::after{content:'▾';color:rgba(255,255,255,0.55);font-size:13px;}
+        @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+        /* ── LINKEDIN PROFILE CARD ── */
+        .li-profile { margin: -22px -28px -26px; }
+        .li-body { padding: 24px 22px 22px; }
+
+        /* Avatar row */
+        .li-avatar-row {
+            display: flex; align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px; margin-bottom: 16px;
+        }
+        .li-avatar-wrap {
+            width: 88px; height: 88px; border-radius: 50%;
+            border: 3px solid var(--cream-dk);
+            background: var(--cream-dk);
+            overflow: hidden; flex-shrink: 0;
+            box-shadow: 0 3px 12px rgba(15,31,61,0.15);
+            outline: 3px solid var(--teal);
+            outline-offset: 2px;
+        }
+        .li-avatar { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+        .li-top-actions { display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap; justify-content: flex-end; padding-top: 4px; }
+        .li-btn {
+            font-size: 12px; font-weight: 700; letter-spacing: 0.05em;
+            padding: 7px 18px; border-radius: 99px; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 5px;
+            transition: all 0.18s; border: 2px solid transparent; white-space: nowrap;
+        }
+        .li-btn-primary { background: var(--teal); color: #fff; border-color: var(--teal); }
+        .li-btn-primary:hover { background: var(--teal-lt); border-color: var(--teal-lt); color: #fff; text-decoration: none; }
+        .li-btn-ghost { background: transparent; color: var(--navy); border-color: var(--navy); }
+        .li-btn-ghost:hover { background: var(--navy); color: #fff; text-decoration: none; }
+
+        /* Info */
+        .li-name { font-family: 'DM Serif Display', serif; font-size: clamp(18px,2.8vw,24px); color: var(--navy); margin: 0 0 4px; }
+        .li-headline { font-size: 12px; font-weight: 600; color: var(--teal); letter-spacing: 0.04em; margin-bottom: 4px; }
+        .li-location { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+        .li-summary { font-size: 13px; color: var(--text); line-height: 1.65; margin: 0; }
+        .li-divider { height: 1px; background: var(--cream-dk); margin: 14px 0; }
+        .li-stats { display: flex; }
+        .li-stat { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8px 4px; text-align: center; border-right: 1px solid var(--cream-dk); }
+        .li-stat:last-child { border-right: none; }
+        .li-stat-num { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--navy); line-height: 1; }
+        .li-stat-lbl { font-size: 10px; color: var(--muted); margin-top: 3px; letter-spacing: 0.04em; }
+        .li-links { display: flex; flex-direction: column; gap: 5px; }
+        .li-link { font-size: 12px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+        .li-link:hover { color: var(--teal); }
+
+        /* MAP TOUCH FIX */
         .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan,
-        .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan .mapboxgl-canvas {
-            touch-action: unset;
-        }
-
-        </style>
+        .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan .mapboxgl-canvas{touch-action:unset;}
+    </style>
 </head>
 <body>
 
+<!-- Progress nav -->
+<nav id="progress-nav">
+    <span class="nav-name">Muhammad Rifqy</span>
+    <span class="nav-sep">·</span>
+    <span class="nav-section" id="nav-section-label">Geographical Resumé</span>
+    <button id="nav-toggle-btn" onclick="toggleNavPanel()">≡ Sections</button>
+</nav>
+<div id="progress-bar-track"><div id="progress-bar-fill"></div></div>
+
+<!-- Dropdown nav -->
+<div id="nav-panel">
+    <span class="nav-panel-label">Jump to section</span>
+    <div class="nav-panel-group" id="nav-links-container"></div>
+</div>
+
+<!-- Scroll hint -->
+<div id="scroll-hint"><span>Scroll</span><div class="hint-arrow"></div></div>
+
 <div id="map"></div>
-<div id="mapInset"></div>
+
+<!-- Inset map -->
+<div id="inset-container">
+    <button id="inset-toggle" onclick="toggleInset()">
+        <span class="arrow">▲</span> Overview Map
+    </button>
+    <div id="mapInset"></div>
+</div>
+
 <div id="story"></div>
+
+<!-- Showcase Modal -->
+<div id="showcase-modal">
+    <div id="modal-bar">
+        <div id="modal-title-area">
+            <div id="modal-title">Project</div>
+            <div id="modal-subtitle">Loading…</div>
+        </div>
+        <div id="modal-actions">
+            <a id="modal-open-btn" href="#" target="_blank">↗ Open in new tab</a>
+            <button id="modal-close-btn" onclick="closeShowcase()">✕</button>
+        </div>
+    </div>
+    <div id="modal-iframe-wrap">
+        <div id="modal-loading">
+            <div class="loading-spinner"></div>
+            <p>Loading project…</p>
+        </div>
+        <iframe id="showcase-iframe" src="" title="Project Showcase"></iframe>
+    </div>
+</div>
 
 <script src="./config.js"></script>
 <script>
-var initLoad = true;
-var layerTypes = {
-    'fill': ['fill-opacity'],
-    'line': ['line-opacity'],
-    'circle': ['circle-opacity', 'circle-stroke-opacity'],
-    'symbol': ['icon-opacity', 'text-opacity'],
-    'raster': ['raster-opacity'],
-    'fill-extrusion': ['fill-extrusion-opacity'],
-    'heatmap': ['heatmap-opacity']
-}
+/* ─── Nav sections ─── */
+var navSections = [
+    {label:'About Me',id:'aboutme'},
+    {label:'Skills',id:'skills'},
+    {label:'Education',id:'education-sec'},
+    {label:'Work Experience',id:'experience-sec'},
+    {label:'Showcase',id:'showcase-sec'},
+    {label:'Courses',id:'courses-sec'},
+    {label:'Publications',id:'research-sec'},
+    {label:'Awards & Projects',id:'awards-projects'},
+    {label:'Portfolio & CV',id:'portfolio'},
+];
+var sectionLabels = {
+    'aboutme':'About Me','skills':'Skills & Tools',
+    'education-sec':'Education','education':'Education',
+    'experience-sec':'Work Experience','work-all':'Work Experience',
+    'showcase-sec':'Showcase','showcase':'Showcase',
+    'courses-sec':'Courses','courses':'Courses & Certifications',
+    'research-sec':'Publications','pub1':'Publications',
+    'awards-projects':'Awards & Projects','portfolio':'Portfolio & CV'
+};
 
-var alignments = {
-    'left': 'lefty',
-    'center': 'centered',
-    'right': 'righty',
-    'full': 'fully'
-}
-
-function getLayerPaintType(layer) {
-    var layerType = map.getLayer(layer).type;
-    return layerTypes[layerType];
-}
-
-function setLayerOpacity(layer) {
-    var paintProps = getLayerPaintType(layer.layer);
-    paintProps.forEach(function(prop) {
-        var options = {};
-        if (layer.duration) {
-            var transitionProp = prop + "-transition";
-            options = { "duration": layer.duration };
-            map.setPaintProperty(layer.layer, transitionProp, options);
+/* ─── Vertical tab switcher ─── */
+function switchTab(event, group, panelId, lng, lat, zoom) {
+    var wrap = event.currentTarget.closest('.vtab-wrap');
+    if (!wrap) return;
+    wrap.querySelectorAll('.vtab-btn').forEach(function(b){ b.classList.remove('active'); });
+    wrap.querySelectorAll('.vtab-panel').forEach(function(p){ p.classList.remove('active'); });
+    event.currentTarget.classList.add('active');
+    var panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+    if (typeof lng !== 'undefined' && typeof map !== 'undefined') {
+        map.flyTo({center:[lng, lat], zoom:zoom||14, pitch:45, bearing:0, duration:1600});
+        if (typeof marker !== 'undefined') marker.setLngLat([lng, lat]);
+        // Walk up to the .step and update its coord badge
+        var el = wrap;
+        while (el && !el.classList.contains('step')) el = el.parentElement;
+        if (el) {
+            var coordEl = el.querySelector('.card-coord');
+            if (coordEl) coordEl.textContent = '◉  ' + formatCoord([lng, lat]);
         }
-        map.setPaintProperty(layer.layer, prop, layer.opacity, options);
+    }
+}
+
+/* ─── Showcase modal ─── */
+function openShowcase(url, title, subtitle) {
+    var modal   = document.getElementById('showcase-modal');
+    var iframe  = document.getElementById('showcase-iframe');
+    var loading = document.getElementById('modal-loading');
+    var openBtn = document.getElementById('modal-open-btn');
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-subtitle').textContent = subtitle;
+    openBtn.href = url;
+    loading.classList.remove('done');
+    iframe.src = '';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    iframe.onload = function() { loading.classList.add('done'); };
+    setTimeout(function(){ iframe.src = url; }, 80);
+}
+function closeShowcase() {
+    var modal  = document.getElementById('showcase-modal');
+    var iframe = document.getElementById('showcase-iframe');
+    modal.classList.remove('open');
+    iframe.src = '';
+    document.body.style.overflow = '';
+}
+// Close on Escape
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeShowcase(); });
+
+/* ─── Inset toggle ─── */
+function toggleInset(){
+    var inset = document.getElementById('mapInset');
+    var btn   = document.getElementById('inset-toggle');
+    var collapsed = inset.classList.toggle('hidden-inset');
+    btn.classList.toggle('collapsed', collapsed);
+}
+
+/* ─── Nav panel toggle ─── */
+function toggleNavPanel(){
+    var panel = document.getElementById('nav-panel');
+    var btn   = document.getElementById('nav-toggle-btn');
+    var open  = panel.classList.toggle('open');
+    btn.textContent = open ? '✕ Close' : '≡ Sections';
+}
+
+/* ─── Fly to location (loc-btn) ─── */
+function flyToLocation(lng, lat, zoom) {
+    document.querySelectorAll('.loc-btn').forEach(function(b){ b.classList.remove('active-loc'); });
+    if (event && event.currentTarget) event.currentTarget.classList.add('active-loc');
+    map.flyTo({center:[lng,lat], zoom:zoom||15, pitch:45, bearing:0, duration:1800});
+    if(typeof marker !== 'undefined') marker.setLngLat([lng,lat]);
+}
+
+/* ─── Build nav links ─── */
+function buildNavLinks(){
+    var c = document.getElementById('nav-links-container');
+    navSections.forEach(function(s){
+        var a = document.createElement('a'); a.textContent = s.label;
+        a.setAttribute('data-id', s.id); a.href = '#';
+        a.onclick = function(e){
+            e.preventDefault();
+            var el = document.getElementById(s.id);
+            if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+            toggleNavPanel();
+        };
+        c.appendChild(a);
     });
 }
 
+/* ─── Coordinate formatter ─── */
+function formatCoord(center){
+    var lat = Math.abs(center[1]).toFixed(3)+'° '+(center[1]>=0?'N':'S');
+    var lng = Math.abs(center[0]).toFixed(3)+'° '+(center[0]>=0?'E':'W');
+    return lat+' · '+lng;
+}
+
+/* ─── Map helpers ─── */
+var initLoad = true;
+var layerTypes = {'fill':['fill-opacity'],'line':['line-opacity'],'circle':['circle-opacity','circle-stroke-opacity'],'symbol':['icon-opacity','text-opacity'],'raster':['raster-opacity'],'fill-extrusion':['fill-extrusion-opacity'],'heatmap':['heatmap-opacity']};
+var alignments = {'left':'lefty','center':'centered','right':'righty','full':'fully'};
+function getLayerPaintType(layer){ return layerTypes[map.getLayer(layer).type]; }
+function setLayerOpacity(layer){
+    var props = getLayerPaintType(layer.layer);
+    props.forEach(function(prop){
+        if(layer.duration) map.setPaintProperty(layer.layer,prop+"-transition",{"duration":layer.duration});
+        map.setPaintProperty(layer.layer,prop,layer.opacity,{});
+    });
+}
+
+/* ─── Build story DOM ─── */
 var story = document.getElementById('story');
-var features = document.createElement('div');
-features.setAttribute('id', 'features');
+var features = document.createElement('div'); features.setAttribute('id','features');
 
+// Header
 var header = document.createElement('div');
-
-if (config.title) {
-    var titleText = document.createElement('h1');
-    titleText.innerText = config.title;
-    header.appendChild(titleText);
+if(config.title||config.subtitle||config.byline){
+    var inner=document.createElement('div'); inner.classList.add('header-inner');
+    var badge=document.createElement('div'); badge.classList.add('coord-badge');
+    badge.innerText='0.000° N · 117.970° E · Riau, Indonesia';
+    inner.appendChild(badge);
+    if(config.title){var t=document.createElement('h1');t.innerText=config.title;inner.appendChild(t);}
+    if(config.subtitle){var s=document.createElement('h2');s.innerText=config.subtitle;inner.appendChild(s);}
+    if(config.byline){var b=document.createElement('p');b.innerText=config.byline;inner.appendChild(b);}
+    header.appendChild(inner); header.setAttribute('id','header'); story.appendChild(header);
 }
 
-if (config.subtitle) {
-    var subtitleText = document.createElement('h2');
-    subtitleText.innerText = config.subtitle;
-    header.appendChild(subtitleText);
-}
+// Chapters
+config.chapters.forEach(function(record, idx){
+    var container=document.createElement('div');
+    var chapter=document.createElement('div'); chapter.classList.add('chapter-content');
+    var isFull=(record.alignment==='full');
+    if(isFull) chapter.classList.add('divider-card');
 
-if (config.byline) {
-    var bylineText = document.createElement('p');
-    bylineText.innerText = config.byline;
-    header.appendChild(bylineText);
-}
+    var body=document.createElement('div'); body.classList.add('card-body');
 
-if (header.innerText.length > 0) {
-    header.classList.add(config.theme);
-    header.setAttribute('id', 'header');
-    story.appendChild(header);
-}
-
-config.chapters.forEach((record, idx) => {
-    var container = document.createElement('div');
-    var chapter = document.createElement('div');
-
-    if (record.title) {
-        var title = document.createElement('h1');
-        title.innerText = record.title;
-        chapter.appendChild(title);
+    if(!isFull && record.id !== 'aboutme'){
+        var coord=document.createElement('div'); coord.classList.add('card-coord');
+        coord.textContent = '◉  ' + formatCoord(record.location.center);
+        body.appendChild(coord);
     }
-    if (record.subtitle) {
-      var subtitle = document.createElement('h2');
-      subtitle.innerText = record.subtitle;
-      chapter.appendChild(subtitle);
-    }
+    if(record.title){var tt=document.createElement('h1');tt.innerText=record.title;body.appendChild(tt);}
+    if(record.subtitle){var ss=document.createElement('h2');ss.innerText=record.subtitle;body.appendChild(ss);}
+    if(record.sectiontitle){var st=document.createElement('h3');st.innerText=record.sectiontitle;body.appendChild(st);}
+    if(record.description){var desc=document.createElement('p');desc.innerHTML=record.description;body.appendChild(desc);}
 
-    if (record.sectiontitle) {
-        var sectiontitle = document.createElement('h3');
-        sectiontitle.innerText = record.sectiontitle;
-        chapter.appendChild(sectiontitle);
+    if(isFull){
+        var acc=document.createElement('div'); acc.classList.add('divider-accent');
+        var hint=document.createElement('span'); hint.classList.add('scroll-hint-label'); hint.innerText='↓ scroll to explore';
+        Array.from(body.children).forEach(function(c){ chapter.appendChild(c); });
+        chapter.appendChild(acc); chapter.appendChild(hint);
+    } else {
+        if(record.image && record.id !== 'aboutme'){
+            var frame=document.createElement('div'); frame.classList.add('img-frame');
+            var img=new Image(); img.src=record.image; img.alt=record.title||'';
+            frame.appendChild(img); chapter.appendChild(frame);
+        }
+        chapter.appendChild(body);
     }
 
-
-    if (record.image) {
-        var image = new Image();
-        image.src = record.image;
-        chapter.appendChild(image);
-    }
-
-    if (record.skillset) {
-        var skillset = document.createElement('h4');
-        skillset.innerText = record.skillset;
-        chapter.appendChild(skillset);
-    } 
-
-    if (record.description) {
-        var story = document.createElement('p');
-        story.innerHTML = record.description;
-        chapter.appendChild(story);
-    }
-
-    container.setAttribute('id', record.id);
-    container.classList.add('step');
-    if (idx === 0) {
-        container.classList.add('active');
-    }
-
-    chapter.classList.add(config.theme);
+    container.setAttribute('id',record.id); container.classList.add('step');
+    if(idx===0) container.classList.add('active');
+    container.classList.add(isFull?'type-full':record.alignment==='center'?'type-center':'type-side');
     container.appendChild(chapter);
-    container.classList.add(alignments[record.alignment] || 'centered');
-    if (record.hidden) {
-        container.classList.add('hidden');
-    }
+    container.classList.add(alignments[record.alignment]||'centered');
+    if(record.hidden) container.classList.add('hidden');
     features.appendChild(container);
 });
 
 story.appendChild(features);
 
-var footer = document.createElement('div');
-
-if (config.footer) {
-    var footerText = document.createElement('p');
-    footerText.innerHTML = config.footer;
-    footer.appendChild(footerText);
+if(config.footer){
+    var footer=document.createElement('div');
+    var fp=document.createElement('p'); fp.innerHTML=config.footer;
+    footer.appendChild(fp); footer.setAttribute('id','footer'); story.appendChild(footer);
 }
 
-if (footer.innerText.length > 0) {
-    footer.classList.add(config.theme);
-    footer.setAttribute('id', 'footer');
-    story.appendChild(footer);
-}
+buildNavLinks();
 
+/* ─── Mapbox ─── */
 mapboxgl.accessToken = config.accessToken;
-
-const transformRequest = (url) => {
-    const hasQuery = url.indexOf("?") !== -1;
-    const suffix = hasQuery ? "&pluginName=scrollytellingV2" : "?pluginName=scrollytellingV2";
-    return {
-      url: url + suffix
-    }
-}
-
+var transformRequest = function(url){ return {url:url+(url.indexOf("?")!==-1?"&":"?")+"pluginName=scrollytellingV2"}; };
 var map = new mapboxgl.Map({
-    container: 'map',
-    style: config.style,
-    center: config.chapters[0].location.center,
-    zoom: config.chapters[0].location.zoom,
-    bearing: config.chapters[0].location.bearing,
-    pitch: config.chapters[0].location.pitch,
-    interactive: false,
-    transformRequest: transformRequest,
-    projection: config.projection
+    container:'map', style:config.style,
+    center:config.chapters[0].location.center, zoom:config.chapters[0].location.zoom,
+    bearing:config.chapters[0].location.bearing, pitch:config.chapters[0].location.pitch,
+    interactive:false, transformRequest:transformRequest, projection:config.projection
 });
 
-// Create a inset map if enabled in config.js
-if (config.inset) {
- var insetMap = new mapboxgl.Map({
-    container: 'mapInset', // container id
-    style: 'mapbox://styles/mapbox/dark-v10', //hosted style id
-    center: config.chapters[0].location.center,
-    // Hardcode above center value if you want insetMap to be static.
-    zoom: 3, // starting zoom
-    hash: false,
-    interactive: true,
-    attributionControl: false,
-    //Future: Once official mapbox-gl-js has globe view enabled,
-    //insetmap can be a globe with the following parameter.
-    //projection: 'globe'
-  });
+if(config.inset){
+    var insetMap = new mapboxgl.Map({
+        container:'mapInset', style:'mapbox://styles/mapbox/dark-v10',
+        center:config.chapters[0].location.center, zoom:3,
+        hash:false, interactive:false, attributionControl:false
+    });
 }
-
-if (config.showMarkers) {
-    var marker = new mapboxgl.Marker({ color: config.markerColor });
+if(config.showMarkers){
+    var marker=new mapboxgl.Marker({color:config.markerColor});
     marker.setLngLat(config.chapters[0].location.center).addTo(map);
 }
 
-// instantiate the scrollama
-var scroller = scrollama();
+var scroller=scrollama(); var totalSteps=config.chapters.length;
 
+function addLineLayer(id,coords){
+    map.addLayer({'id':id,'type':'line','source':{'type':'geojson','data':{'type':'Feature','properties':{},'geometry':{'type':'Polygon','coordinates':[coords]}}},'paint':{'line-color':'#2a9090','line-width':3,'line-opacity':0.9}});
+}
 
-map.on("load", function() {
-    if (config.use3dTerrain) {
-        map.addSource('mapbox-dem', {
-            'type': 'raster-dem',
-            'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
-            'tileSize': 512,
-            'maxzoom': 14
-        });
-        // add the DEM source as a terrain layer with exaggerated height
-        map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
-
-        // add a sky layer that will show when the map is highly pitched
-        map.addLayer({
-            'id': 'sky',
-            'type': 'sky',
-            'paint': {
-                'sky-type': 'atmosphere',
-                'sky-atmosphere-sun': [0.0, 0.0],
-                'sky-atmosphere-sun-intensity': 15
-            }
-        });
-
-        
-
-        
-    };
-    
-   
-    // Add a layer showing the loc polygons.
-  
-
-        map.addLayer({
-                'id': 'geo',
-                'type': 'line',
-                'source': {
-                'type': 'geojson',
-                'data': {
-                    "type": "Feature",
-                    "properties": {
-
-                    },
-                    "geometry": {
-                    "type": "Polygon",
-                    "coordinates": [
-          [
-            [
-              110.3766004532822,
-              -7.766082457581732,
-              0
-            ],
-            [
-              110.3765306727721,
-              -7.766331641059636,
-              0
-            ],
-            [
-              110.376612631426,
-              -7.766364478775635,
-              0
-            ],
-            [
-              110.376587838369,
-              -7.7665880406623,
-              0
-            ],
-            [
-              110.3779741819949,
-              -7.767037719066499,
-              0
-            ],
-            [
-              110.3783842142167,
-              -7.765932955053766,
-              0
-            ],
-            [
-              110.3774098744768,
-              -7.765628642458327,
-              0
-            ],
-            [
-              110.3772142459672,
-              -7.766135537704328,
-              0
-            ],
-            [
-              110.3770523862429,
-              -7.766073943319044,
-              0
-            ],
-            [
-              110.3769653000529,
-              -7.766200579516181,
-              0
-            ],
-            [
-              110.3766004532822,
-              -7.766082457581732,
-              0
-            ]
-          ]
-        ]
-                    }
-                }
-                },
-                'paint': {
-                'line-color': '#0071bc',
-                'line-width': 3
-                }
-            });
-
-        map.addLayer({
-                'id': 'p3e',
-                'type': 'line',
-                'source': {
-                'type': 'geojson',
-                'data': {
-                    "type": "Feature",
-                    "properties": {
-
-                    },
-                    "geometry": {
-                    "type": "Polygon",
-                    "coordinates": [
-          [
-            [
-              110.337299182237,
-              -7.760445903067198,
-              0
-            ],
-            [
-              110.3382432253082,
-              -7.76075846253265,
-              0
-            ],
-            [
-              110.3383493347375,
-              -7.760669154879038,
-              0
-            ],
-            [
-              110.3383832854159,
-              -7.760565469571945,
-              0
-            ],
-            [
-              110.3376809437043,
-              -7.760339541319354,
-              0
-            ],
-            [
-              110.3373712326607,
-              -7.760240313658558,
-              0
-            ],
-            [
-              110.337299182237,
-              -7.760445903067198,
-              0
-            ]
-          ]
-        ]
-                    }
-                }
-                },
-                'paint': {
-                'line-color': '#0071bc',
-                'line-width': 3
-                }
-            });
-
-        map.addLayer({
-                'id': 'smansa',
-                'type': 'line',
-                'source': {
-                'type': 'geojson',
-                'data': {
-                    "type": "Feature",
-                    "properties": {
-
-                    },
-                    "geometry": {
-                    "type": "Polygon",
-                    "coordinates": [
-          [
-            [
-              101.4361203011511,
-              1.619378944637818,
-              0
-            ],
-            [
-              101.4356802714838,
-              1.619530397134317,
-              0
-            ],
-            [
-              101.4356590118179,
-              1.619599120675148,
-              0
-            ],
-            [
-              101.4356010108467,
-              1.619622589150768,
-              0
-            ],
-            [
-              101.4356027270417,
-              1.619632204955576,
-              0
-            ],
-            [
-              101.435606474137,
-              1.619644257147693,
-              0
-            ],
-            [
-              101.4356161347372,
-              1.619668499717893,
-              0
-            ],
-            [
-              101.4356258590153,
-              1.619692902133105,
-              0
-            ],
-            [
-              101.4356292157375,
-              1.619717402693545,
-              0
-            ],
-            [
-              101.435633140558,
-              1.619727273232733,
-              0
-            ],
-            [
-              101.4356348357371,
-              1.619739616060114,
-              0
-            ],
-            [
-              101.4356344734816,
-              1.619749502155177,
-              0
-            ],
-            [
-              101.4356342920589,
-              1.619754454836982,
-              0
-            ],
-            [
-              101.435408918034,
-              1.619820292484073,
-              0
-            ],
-            [
-              101.4353319394978,
-              1.619844029645165,
-              0
-            ],
-            [
-              101.4353359258852,
-              1.619947586379037,
-              0
-            ],
-            [
-              101.4350323201374,
-              1.620015569456026,
-              0
-            ],
-            [
-              101.4350152592434,
-              1.619972319377663,
-              0
-            ],
-            [
-              101.4347740083417,
-              1.619902796964626,
-              0
-            ],
-            [
-              101.43465129999,
-              1.619878060356943,
-              0
-            ],
-            [
-              101.4347129260244,
-              1.619762697896724,
-              0
-            ],
-            [
-              101.4349371598732,
-              1.619348767052225,
-              0
-            ],
-            [
-              101.4351511875626,
-              1.619143611379217,
-              0
-            ],
-            [
-              101.4355707185414,
-              1.618836015392801,
-              0
-            ],
-            [
-              101.4357584721064,
-              1.618960202372916,
-              0
-            ],
-            [
-              101.4361203011511,
-              1.619378944637818,
-              0
-            ]
-          ]
-        ]
-                    }
-                }
-                },
-                'paint': {
-                'line-color': '#0071bc',
-                'line-width': 3
-                }
-            });
-
-            map.addLayer({
-                'id': 'bunderan',
-                'type': 'line',
-                'source': {
-                'type': 'geojson',
-                'data': {
-                    "type": "Feature",
-                    "properties": {
-
-                    },
-                    "geometry": {
-                    "type": "Polygon",
-                    "coordinates": [
-          [
-            [
-              101.4473891878369,
-              0.5179402170874262
-            ],
-            [
-              101.4473623769401,
-              0.5179389000062854
-            ],
-            [
-              101.4473358242469,
-              0.5179349614470758
-            ],
-            [
-              101.44730978547433,
-              0.5179284393402807
-            ],
-            [
-              101.44728451139002,
-              0.5179193964973615
-            ],
-            [
-              101.44726024539722,
-              0.5179079200058496
-            ],
-            [
-              101.44723722119075,
-              0.5178941203906449
-            ],
-            [
-              101.4472156605063,
-              0.5178781305495999
-            ],
-            [
-              101.44719577098505,
-              0.5178601044736407
-            ],
-            [
-              101.44717774417403,
-              0.5178402157637497
-            ],
-            [
-              101.44716175368123,
-              0.5178186559590918
-            ],
-            [
-              101.4471479535038,
-              0.5177956326923877
-            ],
-            [
-              101.44713647654504,
-              0.5177713676902962
-            ],
-            [
-              101.44712743333427,
-              0.5177460946380648
-            ],
-            [
-              101.44712091096257,
-              0.5177200569290129
-            ],
-            [
-              101.44711697224388,
-              0.5176935053205198
-            ],
-            [
-              101.44711565511017,
-              0.5176666955190953
-            ],
-            [
-              101.44711697224618,
-              0.517639885717784
-            ],
-            [
-              101.44712091096707,
-              0.5176133341096267
-            ],
-            [
-              101.44712743334082,
-              0.5175872964011199
-            ],
-            [
-              101.44713647655338,
-              0.5175620233496222
-            ],
-            [
-              101.4471479535136,
-              0.5175377583484245
-            ],
-            [
-              101.44716175369211,
-              0.5175147350827402
-            ],
-            [
-              101.44717774418561,
-              0.5174931752791888
-            ],
-            [
-              101.44719577099687,
-              0.5174732865704487
-            ],
-            [
-              101.44721566051786,
-              0.5174552604956404
-            ],
-            [
-              101.44723722120163,
-              0.5174392706557019
-            ],
-            [
-              101.44726024540702,
-              0.517425471041517
-            ],
-            [
-              101.44728451139837,
-              0.5174139945508991
-            ],
-            [
-              101.44730978548088,
-              0.5174049517087135
-            ],
-            [
-              101.44733582425144,
-              0.5173984296024636
-            ],
-            [
-              101.4473623769424,
-              0.5173944910435897
-            ],
-            [
-              101.4473891878369,
-              0.5173931739625622
-            ],
-            [
-              101.44741599873143,
-              0.5173944910435897
-            ],
-            [
-              101.4474425514224,
-              0.5173984296024636
-            ],
-            [
-              101.44746859019293,
-              0.5174049517087135
-            ],
-            [
-              101.44749386427547,
-              0.5174139945508991
-            ],
-            [
-              101.44751813026681,
-              0.517425471041517
-            ],
-            [
-              101.44754115447219,
-              0.5174392706557019
-            ],
-            [
-              101.44756271515597,
-              0.5174552604956404
-            ],
-            [
-              101.44758260467697,
-              0.5174732865704487
-            ],
-            [
-              101.44760063148823,
-              0.5174931752791888
-            ],
-            [
-              101.44761662198172,
-              0.5175147350827402
-            ],
-            [
-              101.4476304221602,
-              0.5175377583484245
-            ],
-            [
-              101.44764189912046,
-              0.5175620233496222
-            ],
-            [
-              101.44765094233298,
-              0.5175872964011199
-            ],
-            [
-              101.44765746470674,
-              0.5176133341096267
-            ],
-            [
-              101.44766140342766,
-              0.517639885717784
-            ],
-            [
-              101.44766272056364,
-              0.5176666955190953
-            ],
-            [
-              101.44766140342995,
-              0.5176935053205198
-            ],
-            [
-              101.44765746471127,
-              0.5177200569290129
-            ],
-            [
-              101.44765094233955,
-              0.5177460946380648
-            ],
-            [
-              101.4476418991288,
-              0.5177713676902962
-            ],
-            [
-              101.44763042217001,
-              0.5177956326923877
-            ],
-            [
-              101.44761662199261,
-              0.5178186559590918
-            ],
-            [
-              101.4476006314998,
-              0.5178402157637497
-            ],
-            [
-              101.44758260468876,
-              0.5178601044736407
-            ],
-            [
-              101.44756271516754,
-              0.5178781305495999
-            ],
-            [
-              101.44754115448309,
-              0.5178941203906449
-            ],
-            [
-              101.44751813027662,
-              0.5179079200058496
-            ],
-            [
-              101.44749386428381,
-              0.5179193964973615
-            ],
-            [
-              101.44746859019949,
-              0.5179284393402807
-            ],
-            [
-              101.4474425514269,
-              0.5179349614470758
-            ],
-            [
-              101.44741599873373,
-              0.5179389000062854
-            ],
-            [
-              101.4473891878369,
-              0.5179402170874262
-            ] ]]
-                    }
-                }
-                },
-                'paint': {
-                'line-color': '#0071bc',
-                'line-width': 3
-                }
-            });
-
-
-            map.addLayer({
-                'id': 'rawapening',
-                'type': 'line',
-                'source': {
-                'type': 'geojson',
-                'data': {
-                    "type": "Feature",
-                    "properties": {
-
-                    },
-                    "geometry": {
-                    "type": "Polygon",
-                    "coordinates": [
-          [
-            [
-              110.4291239213461,
-              -7.287548196370764
-            ],
-            [
-              110.4291239213461,
-              -7.27229093148415
-            ],
-            [
-              110.41104214118786,
-              -7.27229093148415
-            ],
-            [
-              110.41104214118786,
-              -7.287548196370764
-            ],
-            [
-              110.4291239213461,
-              -7.287548196370764
-            ]
-          ]
-        ]
-                    }
-                }
-                },
-                'paint': {
-                'line-color': '#0071bc',
-                'line-width': 3
-                }
-            });
-
-
-          
-
-
-
-
-
-    // As the map moves, grab and update bounds in inset map.
-    if (config.inset) {
-    map.on('move', getInsetBounds);
+map.on("load",function(){
+    if(config.use3dTerrain){
+        map.addSource('mapbox-dem',{'type':'raster-dem','url':'mapbox://mapbox.mapbox-terrain-dem-v1','tileSize':512,'maxzoom':14});
+        map.setTerrain({'source':'mapbox-dem','exaggeration':1.5});
+        map.addLayer({'id':'sky','type':'sky','paint':{'sky-type':'atmosphere','sky-atmosphere-sun':[0.0,0.0],'sky-atmosphere-sun-intensity':15}});
     }
-    // setup the instance, pass callback functions
-    scroller
-    .setup({
-        step: '.step',
-        offset: 0.5,
-        progress: true
-    })
-    .onStepEnter(async response => {
-        var current_chapter = config.chapters.findIndex(chap => chap.id === response.element.id);
-        var chapter = config.chapters[current_chapter];
-        
+    addLineLayer('geo',[[110.3766004532822,-7.766082457581732,0],[110.3765306727721,-7.766331641059636,0],[110.376612631426,-7.766364478775635,0],[110.376587838369,-7.7665880406623,0],[110.3779741819949,-7.767037719066499,0],[110.3783842142167,-7.765932955053766,0],[110.3774098744768,-7.765628642458327,0],[110.3772142459672,-7.766135537704328,0],[110.3770523862429,-7.766073943319044,0],[110.3769653000529,-7.766200579516181,0],[110.3766004532822,-7.766082457581732,0]]);
+    addLineLayer('p3e',[[110.337299182237,-7.760445903067198,0],[110.3382432253082,-7.76075846253265,0],[110.3383493347375,-7.760669154879038,0],[110.3383832854159,-7.760565469571945,0],[110.3376809437043,-7.760339541319354,0],[110.3373712326607,-7.760240313658558,0],[110.337299182237,-7.760445903067198,0]]);
+    addLineLayer('smansa',[[101.4361203011511,1.619378944637818,0],[101.4356802714838,1.619530397134317,0],[101.4356590118179,1.619599120675148,0],[101.4356010108467,1.619622589150768,0],[101.4356027270417,1.619632204955576,0],[101.435606474137,1.619644257147693,0],[101.4356161347372,1.619668499717893,0],[101.4356258590153,1.619692902133105,0],[101.4356292157375,1.619717402693545,0],[101.435633140558,1.619727273232733,0],[101.4356348357371,1.619739616060114,0],[101.4356344734816,1.619749502155177,0],[101.4356342920589,1.619754454836982,0],[101.435408918034,1.619820292484073,0],[101.4353319394978,1.619844029645165,0],[101.4353359258852,1.619947586379037,0],[101.4350323201374,1.620015569456026,0],[101.4350152592434,1.619972319377663,0],[101.4347740083417,1.619902796964626,0],[101.43465129999,1.619878060356943,0],[101.4347129260244,1.619762697896724,0],[101.4349371598732,1.619348767052225,0],[101.4351511875626,1.619143611379217,0],[101.4355707185414,1.618836015392801,0],[101.4357584721064,1.618960202372916,0],[101.4361203011511,1.619378944637818,0]]);
+    addLineLayer('bunderan',[[101.4473891878369,0.5179402170874262],[101.4473623769401,0.5179389000062854],[101.4473358242469,0.5179349614470758],[101.44730978547433,0.5179284393402807],[101.44728451139002,0.5179193964973615],[101.44726024539722,0.5179079200058496],[101.44723722119075,0.5178941203906449],[101.4472156605063,0.5178781305495999],[101.44719577098505,0.5178601044736407],[101.44717774417403,0.5178402157637497],[101.44716175368123,0.5178186559590918],[101.4471479535038,0.5177956326923877],[101.44713647654504,0.5177713676902962],[101.44712743333427,0.5177460946380648],[101.44712091096257,0.5177200569290129],[101.44711697224388,0.5176935053205198],[101.44711565511017,0.5176666955190953],[101.44711697224618,0.517639885717784],[101.44712091096707,0.5176133341096267],[101.44712743334082,0.5175872964011199],[101.44713647655338,0.5175620233496222],[101.4471479535136,0.5175377583484245],[101.44716175369211,0.5175147350827402],[101.44717774418561,0.5174931752791888],[101.44719577099687,0.5174732865704487],[101.44721566051786,0.5174552604956404],[101.44723722120163,0.5174392706557019],[101.44726024540702,0.517425471041517],[101.44728451139837,0.5174139945508991],[101.44730978548088,0.5174049517087135],[101.44733582425144,0.5173984296024636],[101.4473623769424,0.5173944910435897],[101.4473891878369,0.5173931739625622],[101.44741599873143,0.5173944910435897],[101.4474425514224,0.5173984296024636],[101.44746859019293,0.5174049517087135],[101.44749386427547,0.5174139945508991],[101.44751813026681,0.517425471041517],[101.44754115447219,0.5174392706557019],[101.44756271515597,0.5174552604956404],[101.44758260467697,0.5174732865704487],[101.44760063148823,0.5174931752791888],[101.44761662198172,0.5175147350827402],[101.4476304221602,0.5175377583484245],[101.44764189912046,0.5175620233496222],[101.44765094233298,0.5175872964011199],[101.44765746470674,0.5176133341096267],[101.44766140342766,0.517639885717784],[101.44766272056364,0.5176666955190953],[101.44766140342995,0.5176935053205198],[101.44765746471127,0.5177200569290129],[101.44765094233955,0.5177460946380648],[101.4476418991288,0.5177713676902962],[101.44763042217001,0.5177956326923877],[101.44761662199261,0.5178186559590918],[101.4476006314998,0.5178402157637497],[101.44758260468876,0.5178601044736407],[101.44756271516754,0.5178781305495999],[101.44754115448309,0.5178941203906449],[101.44751813027662,0.5179079200058496],[101.44749386428381,0.5179193964973615],[101.44746859019949,0.5179284393402807],[101.4474425514269,0.5179349614470758],[101.44741599873373,0.5179389000062854],[101.4473891878369,0.5179402170874262]]);
+    addLineLayer('rawapening',[[110.4291239213461,-7.287548196370764],[110.4291239213461,-7.27229093148415],[110.41104214118786,-7.27229093148415],[110.41104214118786,-7.287548196370764],[110.4291239213461,-7.287548196370764]]);
+
+    if(config.inset) map.on('move',getInsetBounds);
+
+    scroller.setup({step:'.step',offset:0.5,progress:true})
+    .onStepEnter(async function(response){
+        var cur=config.chapters.findIndex(function(c){return c.id===response.element.id;});
+        var chapter=config.chapters[cur];
         response.element.classList.add('active');
-        map[chapter.mapAnimation || 'flyTo'](chapter.location);
-
-        // Incase you do not want to have a dynamic inset map,
-        // rather want to keep it a static view but still change the
-        // bbox as main map move: comment out the below if section.
-        if (config.inset) {
-          if (chapter.location.zoom < 5) {
-            insetMap.flyTo({center: chapter.location.center, zoom: 0});
-          }
-          else {
-            insetMap.flyTo({center: chapter.location.center, zoom: 3});
-          }
-        }
-        if (config.showMarkers) {
-            marker.setLngLat(chapter.location.center);
-        }
-        if (chapter.onChapterEnter.length > 0) {
-            chapter.onChapterEnter.forEach(setLayerOpacity);
-        }
-        if (chapter.callback) {
-            window[chapter.callback]();
-        }
-        if (chapter.rotateAnimation) {
-            map.once('moveend', () => {
-                const rotateNumber = map.getBearing();
-                map.rotateTo(rotateNumber + 180, {
-                    duration: 30000, easing: function (t) {
-                        return t;
-                    }
-                });
+        document.querySelectorAll('.loc-btn').forEach(function(b){b.classList.remove('active-loc');});
+        map[chapter.mapAnimation||'flyTo'](chapter.location);
+        document.getElementById('nav-section-label').innerText=sectionLabels[chapter.id]||chapter.title||'';
+        document.getElementById('progress-bar-fill').style.width=Math.round(((cur+1)/totalSteps)*100)+'%';
+        if(cur>0) document.getElementById('scroll-hint').classList.add('gone');
+        document.querySelectorAll('.nav-panel a').forEach(function(a){a.classList.remove('active-link');});
+        var matchLink=document.querySelector('.nav-panel a[data-id="'+chapter.id+'"]');
+        if(!matchLink){
+            navSections.forEach(function(ns){
+                if(sectionLabels[chapter.id]===ns.label){
+                    var l=document.querySelector('.nav-panel a[data-id="'+ns.id+'"]');
+                    if(l) matchLink=l;
+                }
             });
         }
-        if (config.auto) {
-             var next_chapter = (current_chapter + 1) % config.chapters.length;
-             map.once('moveend', () => {
-                 document.querySelectorAll('[data-scrollama-index="' + next_chapter.toString() + '"]')[0].scrollIntoView();
-             });
+        if(matchLink) matchLink.classList.add('active-link');
+        if(config.inset) insetMap.flyTo({center:chapter.location.center,zoom:chapter.location.zoom<6?1:3,duration:800});
+        if(config.showMarkers) marker.setLngLat(chapter.location.center);
+        if(chapter.onChapterEnter.length>0) chapter.onChapterEnter.forEach(setLayerOpacity);
+        if(chapter.callback) window[chapter.callback]();
+        if(chapter.rotateAnimation){
+            map.once('moveend',function(){
+                var b=map.getBearing();
+                map.rotateTo(b+180,{duration:30000,easing:function(t){return t;}});
+            });
         }
     })
-    .onStepExit(response => {
-        var chapter = config.chapters.find(chap => chap.id === response.element.id);
+    .onStepExit(function(response){
+        var chapter=config.chapters.find(function(c){return c.id===response.element.id;});
         response.element.classList.remove('active');
-        if (chapter.onChapterExit.length > 0) {
-            chapter.onChapterExit.forEach(setLayerOpacity);
-        }
+        if(chapter.onChapterExit.length>0) chapter.onChapterExit.forEach(setLayerOpacity);
     });
-
-
-    if (config.auto) {
-        document.querySelectorAll('[data-scrollama-index="0"]')[0].scrollIntoView();
-    }
 });
 
-//Helper functions for insetmap
-function getInsetBounds() {
-            let bounds = map.getBounds();
-
-            let boundsJson = {
-                "type": "FeatureCollection",
-                "features": [{
-                    "type": "Feature",
-                    "properties": {},
-                    "geometry": {
-                        "type": "Polygon",
-                        "coordinates": [
-                            [
-                                [
-                                    bounds._sw.lng,
-                                    bounds._sw.lat
-                                ],
-                                [
-                                    bounds._ne.lng,
-                                    bounds._sw.lat
-                                ],
-                                [
-                                    bounds._ne.lng,
-                                    bounds._ne.lat
-                                ],
-                                [
-                                    bounds._sw.lng,
-                                    bounds._ne.lat
-                                ],
-                                [
-                                    bounds._sw.lng,
-                                    bounds._sw.lat
-                                ]
-                            ]
-                        ]
-                    }
-                }]
-            }
-
-            if (initLoad) {
-                addInsetLayer(boundsJson);
-                initLoad = false;
-            } else {
-                updateInsetLayer(boundsJson);
-            }
-
-        }
-
-function addInsetLayer(bounds) {
-    insetMap.addSource('boundsSource', {
-        'type': 'geojson',
-        'data': bounds
-    });
-
-    insetMap.addLayer({
-        'id': 'boundsLayer',
-        'type': 'fill',
-        'source': 'boundsSource', // reference the data source
-        'layout': {},
-        'paint': {
-            'fill-color': '#fff', // blue color fill
-            'fill-opacity': 0.2
-        }
-    });
-    // // Add a black outline around the polygon.
-    insetMap.addLayer({
-        'id': 'outlineLayer',
-        'type': 'line',
-        'source': 'boundsSource',
-        'layout': {},
-        'paint': {
-            'line-color': '#000',
-            'line-width': 1
-        }
-    });
+function getInsetBounds(){
+    var bounds=map.getBounds();
+    var bj={"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[bounds._sw.lng,bounds._sw.lat],[bounds._ne.lng,bounds._sw.lat],[bounds._ne.lng,bounds._ne.lat],[bounds._sw.lng,bounds._ne.lat],[bounds._sw.lng,bounds._sw.lat]]]}}]};
+    if(initLoad){addInsetLayer(bj);initLoad=false;}else updateInsetLayer(bj);
 }
-
-function updateInsetLayer(bounds) {
-    insetMap.getSource('boundsSource').setData(bounds);
+function addInsetLayer(b){
+    insetMap.addSource('boundsSource',{'type':'geojson','data':b});
+    insetMap.addLayer({'id':'boundsLayer','type':'fill','source':'boundsSource','layout':{},'paint':{'fill-color':'#fff','fill-opacity':0.15}});
+    insetMap.addLayer({'id':'outlineLayer','type':'line','source':'boundsSource','layout':{},'paint':{'line-color':'#c97c2e','line-width':1.5}});
 }
+function updateInsetLayer(b){insetMap.getSource('boundsSource').setData(b);}
 
-
-
-
-
-// setup resize event
-window.addEventListener('resize', scroller.resize);
-
-
-
+document.addEventListener('click',function(e){
+    var panel=document.getElementById('nav-panel');
+    var btn=document.getElementById('nav-toggle-btn');
+    if(panel.classList.contains('open')&&!panel.contains(e.target)&&!btn.contains(e.target)){
+        panel.classList.remove('open'); btn.textContent='≡ Sections';
+    }
+});
+window.addEventListener('resize',scroller.resize);
 </script>
-
 </body>
 </html>
