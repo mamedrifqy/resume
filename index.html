@@ -1,469 +1,789 @@
-var config = {
-    style: 'mapbox://styles/muhammadrifqy/clf0v0keg003w01pe1pysoc2r',
-    accessToken: 'pk.eyJ1IjoibXVoYW1tYWRyaWZxeSIsImEiOiJjbGptenU2Z2QwdzJjM2xyN2Rham1ndXhoIn0.5_qenbJijy4l7c8xhJBkkQ',
-    showMarkers: true,
-    markerColor: '#2a9090',
-    inset: true,
-    theme: 'light',
-    use3dTerrain: false,
-    auto: false,
-    title: 'GEOGRAPHICAL RESUMÉ',
-    subtitle: 'Muhammad Rifqy · Cartographer · GIS · Spatial Map Visualizer',
-    byline: '',
-    footer: 'Created using <a href="https://github.com/mapbox/storytelling" target="_blank">Mapbox Storytelling</a> with <a href="https://mamedrifqy.github.io/earthy-nav/" target="_blank">Earthy-Nav</a> basemap. | <a href="https://linkedin.com/in/muhammadrifqy" target="_blank">LinkedIn</a> | <a href="https://github.com/mamedrifqy" target="_blank">Github</a>',
-    chapters: [
-        {
-            id: 'aboutme',
-            alignment: 'center',
-            hidden: false,
-            title: '',
-            description: `<div class="li-profile">
-  <div class="li-body">
-    <div class="li-avatar-row">
-      <div class="li-avatar-wrap">
-        <img class="li-avatar" src="https://mamedrifqy.github.io/assets/img/-n0xl5q__1_-removebg-preview (1).png" alt="Muhammad Rifqy">
-      </div>
-      <div class="li-top-actions">
-        <a href="https://mamedrifqy.github.io/resume/Muhammad%20Rifqy_CV_15012026.pdf" target="_blank" class="li-btn li-btn-primary">⬇ Download CV</a>
-        <a href="https://linkedin.com/in/muhammadrifqy" target="_blank" class="li-btn li-btn-ghost">in Connect</a>
-      </div>
-    </div>
-    <div class="li-info">
-      <h2 class="li-name">Muhammad Rifqy</h2>
-      <div class="li-headline">Cartographer &nbsp;·&nbsp; GIS Specialist &nbsp;·&nbsp; Spatial Map Visualizer</div>
-      <div class="li-location">📍 Pekanbaru, Riau, Indonesia</div>
-    </div>
-    <p class="li-summary">Mangrove spatial planner and GIS professional with 3+ years of hands‑on experience in coastal ecosystem analysis, spatial data management, and
-conservation program implementation. Deeply committed to sustainable marine and fisheries resource management, with direct field experience
-supporting mangrove rehabilitation across 5,800+ hectares in collaboration with government agencies, multi‑stakeholder platforms, and local
-communities. Proficient in integrating remote sensing (Sentinel‑1/2, Google Earth Engine), geospatial analysis, and science‑based approaches to
-inform mangrove conservation planning. Skilled in producing technical spatial products, monitoring reports, and communication materials to
-support policy advocacy and programmatic goals.</p>
-    <div class="li-divider"></div>
-    <div class="li-stats">
-      <div class="li-stat"><span class="li-stat-num">5,800+</span><span class="li-stat-lbl">Hectares mapped</span></div>
-      <div class="li-stat"><span class="li-stat-num">100+</span><span class="li-stat-lbl">Community groups</span></div>
-      <div class="li-stat"><span class="li-stat-num">4.00</span><span class="li-stat-lbl">Current GPA</span></div>
-    </div>
-    <div class="li-divider"></div>
-    <div class="li-links">
-      <a href="mailto:muhammadrifqy.work@gmail.com" class="li-link">✉ muhammadrifqy.work@gmail.com</a>
-      <a href="https://mamedrifqy.github.io" target="_blank" class="li-link">⌂ mamedrifqy.github.io</a>
-      <a href="https://github.com/mamedrifqy" target="_blank" class="li-link">⌥ github.com/mamedrifqy</a>
-    </div>
-  </div>
-</div>`,
-            location: { center: [117.97038, -2.49319], zoom: 3.97, pitch: 45, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: false, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-        {
-            id: 'skills',
-            alignment: 'center',
-            hidden: false,
-            title: 'Skills & Tools',
-            description: `<div class="skill-groups">
-  <div class="skill-group"><div class="sg-label">Geographical</div>
-    <div class="skill-row"><span class="skill-badge">Map Making</span><span class="skill-badge">GIS</span><span class="skill-badge">Land Surveying</span><span class="skill-badge">Digital Mapping</span></div>
-  </div>
-  <div class="skill-group"><div class="sg-label">Geospatial Programming</div>
-    <div class="skill-row"><span class="skill-badge">R (sf, terra, ggplot2, rayshader)</span><span class="skill-badge">Python (Geopandas, Folium)</span><span class="skill-badge">Google Earth Engine</span></div>
-  </div>
-  <div class="skill-group"><div class="sg-label">Software</div>
-    <div class="skill-row"><span class="skill-badge">ArcGIS</span><span class="skill-badge">QGIS</span><span class="skill-badge">SAGA</span><span class="skill-badge">Global Mapper</span><span class="skill-badge">RStudio</span><span class="skill-badge">VS Code</span><span class="skill-badge">Jupyter</span></div>
-  </div>
-  <div class="skill-group"><div class="sg-label">Web Mapping</div>
-    <div class="skill-row"><span class="skill-badge">Mapbox Studio</span><span class="skill-badge">kepler.gl</span><span class="skill-badge">QGIStoWeb</span><span class="skill-badge">ArcGIS Online</span></div>
-  </div>
-  <div class="skill-group"><div class="sg-label">Languages</div>
-    <div class="skill-row"><span class="skill-badge">Indonesian (Native)</span><span class="skill-badge">English</span></div>
-  </div>
-</div>`,
-            location: { center: [117.97038, -2.49319], zoom: 3.97, pitch: 45, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: true, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-
-        /* ── EDUCATION ── */
-        {
-            id: 'education-sec',
-            alignment: 'full', hidden: false,
-            title: 'EDUCATION',
-            description: 'Academic journey across Indonesia',
-            location: { center: [112.0, -3.0], zoom: 5.5, pitch: 40, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: false, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-        {
-            id: 'education',
-            alignment: 'left', hidden: false,
-            title: 'Education',
-            description: `
-<div class="vtab-wrap">
-  <div class="vtab-nav">
-    <button class="vtab-btn active" onclick="switchTab(event,'edu','edu-unri',101.3758463, 0.4839435)">
-      <span class="vtab-year">2025–</span>
-      <span class="vtab-name">Universitas Riau</span>
-      <span class="vtab-active-dot"></span>
-    </button>
-    <button class="vtab-btn" onclick="switchTab(event,'edu','edu-ugm',110.37761,-7.76625,16)">
-      <span class="vtab-year">2017–22</span>
-      <span class="vtab-name">Univ. Gadjah Mada</span>
-    </button>
-  </div>
-  <div class="vtab-content">
-    <div id="edu-unri" class="vtab-panel active">
-      <div class="vt-header">
-        <div>
-          <div class="tl-inst">Universitas Riau</div>
-          <div class="tl-loc">Riau, Indonesia</div>
-          <img src="https://mamedrifqy.github.io/resume/assets/idhN3mkERF_1773677826112.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="UNRI">
-        </div>
-        <span class="edu-gpa">GPA: 4.00 / 4.00 (Summa Cum Laude)</span>
-      </div>
-      <div class="tl-deg">M.M.B. — Master of Disaster Management<br><small>Specialized in Peatland &amp; Coastal Disaster</small></div>
-      <div class="tl-period">Aug 2025 – Present</div>
-      <ul>
-        <li><b>Research & Academic Focus:</b> Geostatistical modeling and environmental conservation research, specifically analyzing the intersection of peatland depth, climate anomalies (ENSO), and forest fire dynamics.</li>
-        <li><b>Relevant Coursework:</b> Disaster Management Information Systems & GIS , Forest & Peatland Fires , Peatland Science , Mangrove Conservation , and Climate Change Adaptation & Mitigation.</li>
-      </ul>
-    </div>
-    <div id="edu-ugm" class="vtab-panel">
-      <div class="vt-header">
-        <div>
-          <div class="tl-inst">Universitas Gadjah Mada</div>
-          <div class="tl-loc">D.I. Yogyakarta</div>
-<img src="https://mamedrifqy.github.io/assets/img/Tipografi.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="UGM">
-
-        </div>
-        <span class="edu-gpa">GPA: 3.49 / 4.00</span>
-      </div>
-      <div class="tl-deg">S.Si. — Bachelor of Science in Environmental Geography</div>
-      <div class="tl-period">Aug 2017 – Nov 2022</div>
-      <ul>
-        <li>🏅 Riau Province Scholarship Awardee (Penelusuran Bibit Unggul Kemitraan)</li>
-        <li>Geomorphological Survey Mapping, Environmental Geomorphology</li>
-        <li>Ecology &amp; Environmental Study, Tropical Landscape Ecology, Environmental Management</li>
-      </ul>
-    </div>
-  </div>
-</div>`,
-            location: { center: [101.3758463, 0.4839435], zoom: 14, pitch: 45, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: false, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-
-        /* ── WORK EXPERIENCE ── */
-        {
-            id: 'experience-sec',
-            alignment: 'full', hidden: false,
-            title: 'WORK EXPERIENCE',
-            description: 'Field roles across Riau and Yogyakarta',
-            location: { center: [106.799526, -6.2063092], zoom: 5.0, pitch: 40, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: false, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-        {
-            id: 'work-all',
-            alignment: 'left', hidden: false,
-            title: 'Work Experience',
-            description: `
-<div class="vtab-wrap">
-  <div class="vtab-nav">
-  <button class="vtab-btn active" onclick="switchTab(event,'work','work-ifns',106.799526,-6.2063092,17)">
-      <span class="vtab-year">2026–Present</span>
-      <span class="vtab-name">Indonesia's FOLU Net Sink 2030</span>
-      <span class="vtab-active-dot"></span>
-    </button>  
-  <button class="vtab-btn" onclick="switchTab(event,'work','work-m4cr',101.4595,0.4922,12)">
-      <span class="vtab-year">2024–2026</span>
-      <span class="vtab-name">M4CR Project</span>
-      <span class="vtab-active-dot"></span>
-    </button>
-    <button class="vtab-btn" onclick="switchTab(event,'work','work-lab',110.37794,-7.76646,17)">
-      <span class="vtab-year">2021–24</span>
-      <span class="vtab-name">UGM Laboratory</span>
-    </button>
-    <button class="vtab-btn" onclick="switchTab(event,'work','work-xr',101.4473588,0.517668,14)">
-      <span class="vtab-year">2023–25</span>
-      <span class="vtab-name">XR Riau</span>
-    </button>
-    <button class="vtab-btn" onclick="switchTab(event,'work','work-p3e',110.33745,-7.76044,17)">
-      <span class="vtab-year">2020</span>
-      <span class="vtab-name">P3E Jawa</span>
-    </button>
-  </div>
-  <div class="vtab-content">
-    <div id="work-ifns" class="vtab-panel active">
-      <div class="vt-header">
-        <div>
-          <div class="tl-inst">Indonesia's FOLU Net Sink 2030</div>
-          <div class="tl-loc">Jakarta, Indonesia</div>
-        </div>
-        <img src="https://mamedrifqy.github.io/resume/assets/Logo_IFNS_2026.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="IFNS">
-      </div>
-      <div class="tl-deg">Forestry Technical Staff for Monitoring, Reporting, and Verification</div>
-      <div class="tl-period">May 2024 – Present &nbsp;·&nbsp; KEMENHUT</div>
-      <ul>
-        <li>Supporting the development of MRV methodology documentation and structural guidance for Indonesia's FOLU Net Sink 2030 program, contributing to forestry sector mitigation reporting frameworks.</li>
-        <li>Assisting in compilation and systematic documentation of technical data related to forestry sector activities and GHG mitigation contributions in alignment with national FOLU Net Sink 2030 targets.</li>
-
-
-      </ul>
-    </div>
-  <div class="vtab-content">
-    <div id="work-m4cr" class="vtab-panel">
-      <div class="vt-header">
-        <div>
-          <div class="tl-inst">Mangrove For Coastal Resilience (M4CR)</div>
-          <div class="tl-loc">Pekanbaru, Riau</div>
-        </div>
-        <img src="https://mamedrifqy.github.io/resume/assets/Logo_M4CR_2024.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="M4CR">
-      </div>
-      <div class="tl-deg">Technical Mangrove Rehabilitation Facilitator</div>
-      <div class="tl-period">May 2024 – Present &nbsp;·&nbsp; KEMENHUT–World Bank</div>
-      <ul>
-        <li>Designed a centralized <strong>Shapefile Database System</strong> for <strong>100+ community groups</strong></li>
-        <li>Managed spatial analysis for <strong>5,800+ hectares</strong> of rehabilitation areas</li>
-        <li>Produced high-precision thematic maps compliant with Ministry standards <em>(P.6/PKTL/SETDIT/2017)</em></li>
-        <li>Developed and applied a Google Earth Engine (GEE) workflow integrating Sentinel‑1 SAR (double‑bounce mangrove detection, flood inundation
-depth) and Sentinel‑2 (NDWI, EVI, MVI) to produce a 5‑class mangrove suitability map — supporting ecosystem‑based spatial decision‑making
-for habitat restoration and coastal resilience planning</li>
-        <li>Engineered a remote‑sensing monitoring workflow combining Sentinel‑2 spectral analysis with UAV‑based instance segmentation (YOLOv8)
-to automate detection of invasive fern species (Acrostichum aureum) with 90.4% precision across 1,400 hectares of new planting sites (2025),
-supporting adaptive management.</li>
-
-      </ul>
-    </div>
-    <div id="work-lab" class="vtab-panel">
-      <div class="vt-header">
-        <div>
-          <div class="tl-inst">Laboratory of Environmental Geomorphology &amp; Disaster Mitigation, UGM</div>
-          <div class="tl-loc">D.I. Yogyakarta</div>
-<img src="https://mamedrifqy.github.io/assets/img/Screenshot%202023-08-08%20000320.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="UGM">
-
-        </div>
-      </div>
-      <div class="tl-deg">Laboratory Assistant</div>
-      <div class="tl-period">2021 – 2024</div>
-      <ul>
-        <li>Developed landslide analysis using Multinomial Logistic Regression – Regression Kriging</li>
-        <li>Prepared geocomputational-geostatistics training module for landslide studies in R</li>
-        <li>Courses: Geomorphology, Mineralogy-Petrography, Geomorphological Survey Mapping, Land Survey &amp; Erosion</li>
-      </ul>
-    </div>
-    <div id="work-xr" class="vtab-panel">
-      <div class="vt-header">
-        <div>
-          <div class="tl-inst">Extinction Rebellion Chapter Riau</div>
-          <div class="tl-loc">Pekanbaru, Riau</div>
-<img src="https://mamedrifqy.github.io/resume/assets/WhatsApp%20Image%202023-08-29%20at%206.46.14%20PM.jpeg" style="height:32px;object-fit:contain;flex-shrink:0;" alt="XR Riau">
-        </div>
-      </div>
-      <div class="tl-deg">Graphic &amp; Data Visualizer · Volunteer</div>
-      <div class="tl-period">Aug 2023 – Jul 2025</div>
-      <ul>
-        <li>Visualized spatial data for environmental issues in climate action activities</li>
-        <li>Produced posters and maps for climate activism campaigns</li>
-      </ul>
-    </div>
-    <div id="work-p3e" class="vtab-panel">
-      <div class="vt-header">
-        <div>
-          <div class="tl-inst">Pusat Pengendalian Pembangunan Ekoregion Jawa</div>
-          <div class="tl-loc">D.I. Yogyakarta</div>
-          <img src="https://mamedrifqy.github.io/assets/img/logo.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="P3E">
-        </div>
-      </div>
-      <div class="tl-deg">Student Intern — Land Use Analyst</div>
-      <div class="tl-period">Mar – May 2020</div>
-      <ul>
-        <li>Updated environmental carrying capacity data for West Java — Bogor &amp; Cirebon</li>
-        <li>Delineated <strong>5,000+ land-use polygons</strong> at detail scale (below 1:5,000)</li>
-      </ul>
-    </div>
-  </div>
-</div>`,
-            location: { center: [101.4595, 0.4922], zoom: 12, pitch: 45, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: false, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-
-        /* ── SHOWCASE ── */
-        {
-            id: 'showcase-sec',
-            alignment: 'full', hidden: false,
-            title: 'SHOWCASE',
-            description: 'Interactive geospatial projects — click to explore',
-            location: { center: [104.2, 0.5], zoom: 5.5, pitch: 40, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: false, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-        {
-            id: 'showcase',
-            alignment: 'center', hidden: false,
-            title: 'Project Showcase',
-            description: `
-<div class="showcase-grid">
-  <div class="showcase-card" onclick="openShowcase('https://mamedrifqy.github.io/inundationmap','InundationMap V2','GEE · Sentinel-1 SAR · Sentinel-2 · FABDEM')">
-    <div class="showcase-thumb">
-      <div class="showcase-map-preview" style="background:linear-gradient(135deg,#0a3d5c 0%,#0e6b8a 40%,#1a9090 70%,#2ab5b5 100%)">
-        <div class="sc-map-grid"></div>
-        <div class="sc-map-icon">🌊</div>
-        <div class="sc-map-label">SAR · S2 · FABDEM</div>
-      </div>
-      <div class="showcase-hover-overlay">
-        <span class="sc-open-btn">▶ Open Project</span>
-      </div>
-    </div>
-    <div class="showcase-info">
-      <div class="showcase-tag">GEE · Remote Sensing</div>
-      <div class="showcase-title">InundationMap V2</div>
-      <div class="showcase-desc">Multi-sensor satellite analysis (Sentinel-1 SAR, Sentinel-2, FABDEM) to map inundation, flooding, and stress zones for mangrove rehabilitation planning in Riau — PRM M4CR Project.</div>
-      <div class="showcase-stack">
-        <span class="sc-pill">Google Earth Engine</span>
-        <span class="sc-pill">Sentinel-1 SAR</span>
-        <span class="sc-pill">Mapbox GL JS</span>
-        <span class="sc-pill">Python API</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="showcase-card showcase-card-coming" onclick="openShowcase('https://mamedrifqy.github.io','Portfolio','Full GIS project portfolio')">
-    <div class="showcase-thumb">
-      <div class="showcase-map-preview" style="background:linear-gradient(135deg,#1a3a2a 0%,#2a6b3a 50%,#3a9050 100%)">
-        <div class="sc-map-grid"></div>
-        <div class="sc-map-icon">🗺️</div>
-        <div class="sc-map-label">Maps · Cartography · GIS</div>
-      </div>
-      <div class="showcase-hover-overlay">
-        <span class="sc-open-btn">▶ Open Portfolio</span>
-      </div>
-    </div>
-    <div class="showcase-info">
-      <div class="showcase-tag">Cartography · GIS</div>
-      <div class="showcase-title">Digital Portfolio</div>
-      <div class="showcase-desc">Full curated repository of GIS workflows, cartographic designs, land use analyses, disaster mitigation studies, and web-map development projects.</div>
-      <div class="showcase-stack">
-        <span class="sc-pill">R · Python</span>
-        <span class="sc-pill">ArcGIS · QGIS</span>
-        <span class="sc-pill">Mapbox</span>
-      </div>
-    </div>
-  </div>
-</div>
-<p style="font-size:11px;color:#8a9ab0;text-align:center;margin-top:14px;">Click any project card to open it</p>`,
-            location: { center: [104.2, 0.5], zoom: 5.5, pitch: 30, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: true, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-
-        /* ── COURSES ── */
-        {
-            id: 'courses-sec',
-            alignment: 'full', hidden: false,
-            title: 'COURSES & CERTIFICATIONS',
-            description: 'Continuous learning in geospatial technology',
-            location: { center: [117.97038, -2.49319], zoom: 4.5, pitch: 30, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: false, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-        {
-            id: 'courses',
-            alignment: 'center', hidden: false,
-            title: 'Courses & Certifications',
-            description: `<div class="courses-grid">
-  <div class="course-item"><span class="course-year">2025</span><div><div class="course-name">Bootcamp WebGIS Development</div><div class="course-org">MAPID</div></div></div>
-  <div class="course-item"><span class="course-year">2024</span><div><div class="course-name">Bootcamp QGIS: Pemrosesan dan Aplikasi Citra Satelit Resolusi Tinggi</div><div class="course-org">Geoaccess Indonesia</div></div></div>
-  <div class="course-item"><span class="course-year">2024</span><div><div class="course-name">Pelatihan GEE Tematik: Pemetaan Lahan Mangrove dan Carbon Stock</div><div class="course-org">Geoaccess Indonesia</div></div></div>
-  <div class="course-item"><span class="course-year">2024</span><div><div class="course-name">Pelatihan GEE Tematik: Monitoring Perubahan Garis Pantai dan Prediksinya</div><div class="course-org">Geoaccess Indonesia</div></div></div>
-  <div class="course-item"><span class="course-year">2022</span><div><div class="course-name">Cartography · Going Places with Spatial Analysis · Do-It-Yourself Geo Apps</div><div class="course-org">ESRI MOOC</div></div></div>
-  <div class="course-item"><span class="course-year">2021</span><div><div class="course-name">R Fundamental for Data Science · Python Fundamental for Data Science</div><div class="course-org">DQLab</div></div></div>
-</div>`,
-            location: { center: [117.97038, -2.49319], zoom: 4.5, pitch: 30, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: true, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-
-        /* ── PUBLICATIONS ── */
-        {
-            id: 'research-sec',
-            alignment: 'full', hidden: false,
-            title: 'PUBLICATIONS & RESEARCH',
-            description: 'Peer-reviewed papers and research outputs',
-            location: { center: [102.0, 0.5], zoom: 7, pitch: 40, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: false, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-        {
-            id: 'pub1',
-            alignment: 'left', hidden: false,
-            title: 'Publications',
-            description: `<div class="pub-card">
-  <div class="pub-type">Preprint · Jan 2025</div>
-  <div class="pub-journal">ResearchGate</div>
-  <div class="pub-title">Pemanfaatan Inovasi Geospasial Berbasis Sentinel-2 dan UAV untuk Optimalisasi Rehabilitasi Mangrove dalam Kerangka Program M4CR di Provinsi Riau</div>
-  <p style="font-size:12px;color:#5a6a7a;margin:8px 0 6px;">Geospatial workflow integrating Sentinel-2 and UAV-based YOLOv8 instance segmentation to automate detection of <em>Acrostichum aureum</em> with <strong>90.4% precision</strong>.</p>
-  <div class="pub-doi">DOI: <a href="https://doi.org/10.13140/RG.2.2.21992.53762" target="_blank">10.13140/RG.2.2.21992.53762</a></div>
-</div>
-<div class="pub-card" style="margin-top:12px">
-  <div class="pub-type">Paper · Oct 2022</div>
-  <div class="pub-journal">Jurnal GEA</div>
-  <div class="pub-title">Assessment of Ecosystem Services and Environmental Degradation by Using Landscape Approach in The Riparian Area of Lake Rawapening</div>
-  <p style="font-size:12px;color:#5a6a7a;margin:8px 0 6px;">Spatial distribution of ecosystem services via geomorphological approach; degradation across 2016 and 2020.</p>
-  <div class="pub-doi">DOI: <a href="https://doi.org/10.17509/gea.v22i1.39976" target="_blank">10.17509/gea.v22i1.39976</a></div>
-</div>`,
-            location: { center: [101.4595, 1.5], zoom: 8, pitch: 40, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: false, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-        {
-            id: 'awards-projects',
-            alignment: 'center', hidden: false,
-            title: 'Awards & Projects',
-            description: `<div class="awards-row">
-  <div class="award-item"><span class="award-year">2022</span><div><div class="award-title">🏆 Best Map — Spatialnode Map of the Week</div><div class="award-sub">Global Recognition</div></div></div>
-  <div class="award-item"><span class="award-year">2017–21</span><div><div class="award-title">🎓 Riau Province Scholarship Awardee</div><div class="award-sub">Penelusuran Bibit Unggul Kemitraan Program</div></div></div>
-</div>
-<div class="section-divider-mini"></div>
-<div class="tl-wrap">
-  <div class="tl-item">
-    <div class="tl-dot-col"><div class="tl-dot active-dot"></div><div class="tl-line"></div></div>
-    <div class="tl-body">
-      <div class="tl-inst">med/rif maps</div>
-      <div class="tl-deg">Independent Geospatial Research &amp; Visualization</div>
-      <div class="tl-period">Oct 2023 – Present</div>
-      <p style="font-size:12px;margin:4px 0 0">Experiments with R, Python, GEE. <a href="https://www.instagram.com/medrifmaps/" target="_blank">@medrifmaps</a></p>
-    </div>
-  </div>
-  <div class="tl-item">
-    <div class="tl-dot-col"><div class="tl-dot"></div></div>
-    <div class="tl-body">
-      <div class="tl-inst">Digital Technical Portfolio</div>
-      <div class="tl-deg">Centralized GIS Project Repository</div>
-      <div class="tl-period">2017 – Present</div>
-      <p style="font-size:12px;margin:4px 0 0"><a href="https://mamedrifqy.github.io" target="_blank">mamedrifqy.github.io</a></p>
-    </div>
-  </div>
-</div>`,
-            location: { center: [117.97038, -2.49319], zoom: 4.0, pitch: 45, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: true, callback: '',
-            onChapterEnter: [], onChapterExit: []
-        },
-
-        /* ── PORTFOLIO / CV ── */
-        {
-            id: 'portfolio',
-            alignment: 'full', hidden: false,
-            title: 'PORTFOLIO & CV',
-            description: `Explore the full project gallery and download the CV
-<div class="cta-row">
-  <a href="https://mamedrifqy.github.io" target="_blank" class="cta-btn cta-primary">⌂ View Portfolio</a>
-  <a href="https://mamedrifqy.github.io/resume/Muhammad%20Rifqy_CV_15012026.pdf" target="_blank" download class="cta-btn cta-secondary">⬇ Download CV</a>
-</div>`,
-            location: { center: [117.97038, -2.49319], zoom: 3.97, pitch: 45, bearing: 0 },
-            mapAnimation: 'flyTo', rotateAnimation: true, callback: '',
-            onChapterEnter: [], onChapterExit: []
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8' />
+    <title>Med's Resumé</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link rel="icon" type="image/x-icon" href="https://mamedrifqy.github.io/assets/img/-n0xl5q.jpg">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://unpkg.com/intersection-observer@0.12.0/intersection-observer.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy:#0f1f3d; --teal:#1a6b6b; --teal-lt:#2a9090;
+            --cream:#f7f3ec; --cream-dk:#ede8df;
+            --amber:#c97c2e; --text:#1e2a3a; --muted:#5a6a7a;
+            --card-bg:rgba(247,243,236,0.97);
+            --shadow:0 8px 32px rgba(15,31,61,0.14),0 2px 8px rgba(15,31,61,0.07);
+            --shadow-h:0 18px 52px rgba(15,31,61,0.20),0 4px 14px rgba(15,31,61,0.10);
+            --radius:16px;
         }
-    ]
+        *,*::before,*::after{box-sizing:border-box;}
+        body{margin:0;padding:0;font-family:'DM Sans',sans-serif;background:#0f1f3d;color:var(--text);}
+
+        /* MAP */
+        #map{top:0;height:100vh;width:100vw;position:fixed;z-index:0;}
+
+        /* INSET MAP */
+        #inset-container{position:fixed;bottom:24px;right:24px;z-index:10;display:flex;flex-direction:column;align-items:flex-end;}
+        #inset-toggle{
+            background:rgba(15,31,61,0.88);border:1px solid rgba(255,255,255,0.2);
+            color:rgba(255,255,255,0.8);font-size:11px;font-weight:600;letter-spacing:0.07em;
+            padding:4px 12px 4px 10px;border-radius:99px 99px 0 0;cursor:pointer;
+            display:flex;align-items:center;gap:5px;transition:background 0.2s;border-bottom:none;
+            backdrop-filter:blur(8px);
+        }
+        #inset-toggle:hover{background:rgba(42,144,144,0.5);}
+        #inset-toggle .arrow{font-size:9px;transition:transform 0.3s;display:inline-block;}
+        #inset-toggle.collapsed .arrow{transform:rotate(180deg);}
+        #mapInset{
+            height:160px;width:220px;opacity:1;pointer-events:none;
+            border-radius:0 0 10px 10px;overflow:hidden;
+            box-shadow:0 4px 18px rgba(0,0,0,0.4);
+            border:1px solid rgba(255,255,255,0.18);border-top:none;
+            transition:height 0.35s cubic-bezier(0.4,0,0.2,1),opacity 0.35s ease;
+        }
+        #mapInset.hidden-inset{height:0;opacity:0;}
+        #mapInset .mapboxgl-ctrl-bottom-left{display:none;}
+        @media(max-width:600px){#inset-container{display:none;}}
+
+        /* PROGRESS NAV */
+        #progress-nav{
+            position:fixed;top:0;left:0;right:0;z-index:200;height:52px;
+            background:rgba(15,31,61,0.92);
+            backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+            border-bottom:1px solid rgba(255,255,255,0.09);
+            display:flex;align-items:center;padding:0 20px;gap:12px;
+        }
+        #progress-nav .nav-name{font-family:'DM Serif Display',serif;font-size:15px;color:rgba(255,255,255,0.92);white-space:nowrap;flex-shrink:0;}
+        #progress-nav .nav-sep{color:rgba(255,255,255,0.2);flex-shrink:0;}
+        #progress-nav .nav-section{font-size:11px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--amber);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;}
+        #nav-toggle-btn{
+            margin-left:auto;flex-shrink:0;background:rgba(255,255,255,0.1);
+            border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.82);
+            font-size:12px;font-weight:600;letter-spacing:0.06em;
+            padding:5px 14px;border-radius:99px;cursor:pointer;
+            display:flex;align-items:center;gap:6px;transition:background 0.2s;
+        }
+        #nav-toggle-btn:hover{background:rgba(255,255,255,0.18);}
+
+        /* DROPDOWN NAV */
+        #nav-panel{
+            position:fixed;top:52px;left:0;right:0;z-index:190;
+            background:rgba(12,24,48,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+            border-bottom:1px solid rgba(255,255,255,0.1);
+            padding:16px 24px 20px;display:none;flex-wrap:wrap;gap:6px;
+            max-height:calc(100vh - 52px);overflow-y:auto;
+        }
+        #nav-panel.open{display:flex;}
+        .nav-panel-label{width:100%;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:6px;}
+        .nav-panel-group{display:flex;flex-wrap:wrap;gap:6px;width:100%;}
+        .nav-panel a{
+            display:inline-flex;align-items:center;gap:5px;
+            background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+            color:rgba(255,255,255,0.78);font-size:12px;font-weight:500;
+            padding:6px 14px;border-radius:99px;cursor:pointer;text-decoration:none;
+            transition:background 0.18s,color 0.18s;
+        }
+        .nav-panel a:hover{background:rgba(42,144,144,0.3);color:#fff;border-color:var(--teal-lt);}
+        .nav-panel a.active-link{background:var(--teal);color:#fff;border-color:var(--teal);}
+
+        /* PROGRESS BAR */
+        #progress-bar-track{position:fixed;top:52px;left:0;right:0;z-index:195;height:3px;background:rgba(255,255,255,0.06);}
+        #progress-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--teal),var(--amber));transition:width 0.45s ease;}
+
+        /* STORY */
+        #story{position:relative;z-index:5;padding-top:52px;}
+
+        /* HEADER */
+        #header{position:relative;z-index:5;padding:70px 20px 52px;text-align:center;}
+        .header-inner{
+            display:inline-block;background:var(--card-bg);border-radius:var(--radius);
+            padding:40px 48px 36px;max-width:680px;width:100%;
+            box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.55);
+            position:relative;overflow:hidden;
+        }
+        .header-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--navy),var(--teal),var(--amber));}
+        .coord-badge{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:rgba(255,255,255,0.6);font-size:11px;font-weight:500;letter-spacing:0.06em;padding:4px 12px;border-radius:99px;margin-bottom:20px;}
+        .coord-badge::before{content:'◉';color:var(--amber);font-size:9px;}
+        .header-inner h1{margin:0 0 8px;font-family:'DM Serif Display',serif;font-size:clamp(22px,4vw,36px);color:var(--navy);line-height:1.15;}
+        .header-inner h2{margin:0 0 14px;font-size:13px;font-weight:400;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;}
+        .header-inner p{margin:0;font-size:13px;color:var(--muted);}
+
+        /* FEATURES */
+        #features{padding-top:6vh;padding-bottom:10vh;}
+
+        /* STEPS */
+        .step{padding-bottom:58vh;opacity:0;transform:translateY(22px);transition:opacity 0.55s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);}
+        .step.active{opacity:1;transform:translateY(0);}
+        .step > div.chapter-content{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.55);overflow:hidden;transition:box-shadow 0.3s ease;position:relative;}
+        .step.active > div.chapter-content{box-shadow:var(--shadow-h);}
+        .step > div.chapter-content::before{content:'';display:block;width:100%;height:3px;}
+        .step.type-center > div.chapter-content::before{background:linear-gradient(90deg,var(--navy),var(--teal));}
+        .step.type-side   > div.chapter-content::before{background:linear-gradient(90deg,var(--teal),var(--teal-lt));}
+        .step.type-full   > div.chapter-content::before{background:linear-gradient(90deg,var(--amber),var(--teal));}
+        .card-body{padding:22px 28px 26px;line-height:1.7;font-size:14px;color:var(--text);}
+        @media(max-width:600px){.card-body{padding:18px 16px;}}
+
+        /* COORD BADGE IN CARDS */
+        .card-coord{display:inline-flex;align-items:center;gap:5px;background:rgba(15,31,61,0.07);color:var(--muted);font-size:10px;font-weight:600;letter-spacing:0.06em;padding:3px 10px;border-radius:99px;margin-bottom:12px;border:1px solid rgba(15,31,61,0.1);}
+
+        /* TYPOGRAPHY */
+        .step h1{font-family:'DM Serif Display',serif;font-size:clamp(17px,2.4vw,23px);color:var(--navy);margin:0 0 4px;line-height:1.2;}
+        .step h2{font-size:13px;font-weight:500;color:var(--teal);margin:0 0 3px;}
+        .step h3{font-size:10px;font-weight:700;color:var(--amber);letter-spacing:0.12em;text-transform:uppercase;margin:0 0 12px;display:flex;align-items:center;gap:5px;}
+        .step h3::before{content:'◆';font-size:7px;}
+
+        /* DIVIDER */
+        .divider-card{
+            background:rgba(10,20,45,0.82) !important;backdrop-filter:blur(12px) !important;-webkit-backdrop-filter:blur(12px) !important;
+            box-shadow:none !important;border:none !important;border-radius:0 !important;
+            padding:52px 24px 44px !important;text-align:center;
+        }
+        .divider-card::before{display:none !important;}
+        .divider-card h1{color:rgba(255,255,255,0.97) !important;font-size:clamp(22px,3.5vw,38px) !important;text-transform:uppercase !important;letter-spacing:0.16em !important;margin:0 0 10px !important;text-shadow:0 2px 20px rgba(0,0,0,0.5);}
+        .divider-card p{color:rgba(255,255,255,0.55) !important;font-size:13px !important;margin:0 !important;}
+        .scroll-hint-label{display:inline-block;margin-top:14px;font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;}
+        .divider-accent{width:48px;height:3px;background:linear-gradient(90deg,var(--teal),var(--amber));border-radius:99px;margin:14px auto 0;}
+
+        /* IMAGE */
+        .img-frame{overflow:hidden;max-height:220px;}
+        .img-frame img{width:100%;display:block;object-fit:cover;height:100%;transition:transform 0.7s ease;}
+        .step.active .img-frame img{transform:scale(1.03);}
+
+        /* ROLE TAG */
+        .role-tag{font-size:11px !important;font-weight:700 !important;color:var(--teal) !important;letter-spacing:0.08em !important;text-transform:uppercase !important;margin:0 0 10px !important;}
+        .contact-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;}
+        .contact-row a{font-size:11px;color:var(--muted);background:rgba(26,107,107,0.08);border:1px solid rgba(26,107,107,0.2);padding:3px 10px;border-radius:99px;text-decoration:none;}
+        .contact-row a:hover{color:var(--teal);}
+
+        /* SKILL BADGES */
+        .skill-groups{display:flex;flex-direction:column;gap:10px;}
+        .skill-group{display:flex;flex-direction:column;gap:5px;}
+        .sg-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+        .skill-row{display:flex;flex-wrap:wrap;gap:5px;}
+        .skill-badge{display:inline-flex;align-items:center;gap:3px;background:rgba(26,107,107,0.08);color:var(--teal);border:1px solid rgba(26,107,107,0.2);border-radius:99px;font-size:11px;font-weight:600;padding:3px 10px;letter-spacing:0.04em;text-transform:uppercase;}
+        .skill-badge::before{content:'▸';font-size:8px;}
+
+        /* ── VERTICAL TABS ── */
+        .vtab-wrap{display:flex;gap:0;min-height:200px;border-radius:10px;overflow:hidden;border:1px solid var(--cream-dk);}
+        .vtab-nav{
+            display:flex;flex-direction:column;
+            background:rgba(15,31,61,0.05);
+            border-right:1px solid var(--cream-dk);
+            flex-shrink:0;width:140px;
+        }
+        .vtab-btn{
+            display:flex;flex-direction:column;align-items:flex-start;
+            padding:14px 14px 14px 16px;
+            background:transparent;border:none;cursor:pointer;
+            border-bottom:1px solid var(--cream-dk);
+            text-align:left;position:relative;
+            transition:background 0.18s;
+            gap:2px;
+        }
+        .vtab-btn:last-child{border-bottom:none;}
+        .vtab-btn:hover{background:rgba(26,107,107,0.07);}
+        .vtab-btn.active{background:rgba(26,107,107,0.12);}
+        .vtab-btn.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--teal);}
+        .vtab-year{font-size:10px;font-weight:700;color:var(--amber);letter-spacing:0.06em;}
+        .vtab-name{font-size:11px;font-weight:600;color:var(--navy);line-height:1.3;}
+        .vtab-active-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);margin-top:3px;}
+        .vtab-content{flex:1;overflow:hidden;min-width:0;}
+        .vtab-panel{display:none;padding:16px 18px;animation:fadeIn 0.25s ease;}
+        .vtab-panel.active{display:block;}
+        @keyframes fadeIn{from{opacity:0;transform:translateX(6px)}to{opacity:1;transform:translateX(0)}}
+
+        /* vtab header row */
+        .vt-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px;}
+        .vt-header > div{flex:1;min-width:0;}
+        .edu-gpa{font-size:11px;font-weight:700;color:var(--teal);background:rgba(26,107,107,0.1);border:1px solid rgba(26,107,107,0.2);padding:3px 8px;border-radius:99px;white-space:nowrap;flex-shrink:0;}
+        .tl-inst{font-weight:700;font-size:14px;color:var(--navy);line-height:1.3;}
+        .tl-loc{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px;}
+        .tl-deg{font-size:12px;color:var(--teal);margin:4px 0 4px;line-height:1.4;font-weight:500;}
+        .tl-period{font-size:10px;font-weight:700;color:var(--amber);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:4px;}
+        .tl-period::before{content:'◆';font-size:7px;}
+        .vtab-panel ul{padding-left:16px;margin:0;}
+        .vtab-panel ul li{font-size:12px;color:var(--text);margin-bottom:4px;line-height:1.55;}
+        @media(max-width:600px){
+            .vtab-wrap{flex-direction:column;}
+            .vtab-nav{width:100%;flex-direction:row;border-right:none;border-bottom:1px solid var(--cream-dk);overflow-x:auto;}
+            .vtab-btn{flex-direction:row;gap:8px;border-bottom:none;border-right:1px solid var(--cream-dk);white-space:nowrap;}
+            .vtab-btn:last-child{border-right:none;}
+            .vtab-btn.active::before{width:100%;height:3px;top:auto;bottom:0;left:0;}
+        }
+
+        /* LOC BUTTON */
+        .loc-btn{width:22px;height:22px;background:rgba(26,107,107,0.1);border:1px solid rgba(26,107,107,0.25);border-radius:50%;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:11px;transition:background 0.2s,transform 0.2s;vertical-align:middle;}
+        .loc-btn:hover{background:rgba(26,107,107,0.25);transform:scale(1.1);}
+        .loc-btn.active-loc{background:var(--teal);border-color:var(--teal);}
+
+        /* TIMELINE (for awards) */
+        .tl-wrap{display:flex;flex-direction:column;}
+        .tl-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--cream-dk);}
+        .tl-item:last-child{border-bottom:none;padding-bottom:0;}
+        .tl-dot-col{display:flex;flex-direction:column;align-items:center;flex-shrink:0;padding-top:4px;min-width:14px;}
+        .tl-dot{width:10px;height:10px;border-radius:50%;background:var(--cream-dk);border:2px solid var(--teal-lt);flex-shrink:0;}
+        .tl-dot.active-dot{background:var(--teal);border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,107,107,0.2);}
+        .tl-line{flex:1;width:2px;background:var(--cream-dk);margin-top:5px;min-height:20px;}
+        .tl-body{flex:1;min-width:0;}
+
+        /* ── SHOWCASE GRID ── */
+        .showcase-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px;}
+        @media(max-width:600px){.showcase-grid{grid-template-columns:1fr;}}
+        .showcase-card{
+            border-radius:12px;overflow:hidden;
+            border:1px solid var(--cream-dk);
+            background:#fff;
+            cursor:pointer;
+            transition:transform 0.25s ease,box-shadow 0.25s ease;
+            box-shadow:0 2px 10px rgba(15,31,61,0.08);
+        }
+        .showcase-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(15,31,61,0.15);}
+        .showcase-thumb{position:relative;height:120px;overflow:hidden;}
+        .showcase-map-preview{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative;}
+        .sc-map-grid{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.06) 0,rgba(255,255,255,0.06) 1px,transparent 1px,transparent 32px),repeating-linear-gradient(90deg,rgba(255,255,255,0.06) 0,rgba(255,255,255,0.06) 1px,transparent 1px,transparent 32px);}
+        .sc-map-icon{font-size:28px;position:relative;z-index:1;}
+        .sc-map-label{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);position:relative;z-index:1;}
+        .showcase-hover-overlay{
+            position:absolute;inset:0;
+            background:rgba(15,31,61,0.72);
+            display:flex;align-items:center;justify-content:center;
+            opacity:0;transition:opacity 0.25s ease;
+        }
+        .showcase-card:hover .showcase-hover-overlay{opacity:1;}
+        .sc-open-btn{
+            background:var(--teal);color:#fff;
+            font-size:12px;font-weight:700;letter-spacing:0.06em;
+            padding:8px 18px;border-radius:99px;
+            display:flex;align-items:center;gap:6px;
+        }
+        .showcase-info{padding:12px 14px 14px;}
+        .showcase-tag{font-size:10px;font-weight:700;color:var(--amber);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;}
+        .showcase-title{font-weight:700;font-size:14px;color:var(--navy);margin-bottom:5px;font-family:'DM Serif Display',serif;}
+        .showcase-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:8px;}
+        .showcase-stack{display:flex;flex-wrap:wrap;gap:4px;}
+        .sc-pill{font-size:10px;background:rgba(15,31,61,0.07);color:var(--navy);border-radius:99px;padding:2px 8px;font-weight:500;}
+
+        /* ── SHOWCASE MODAL ── */
+        #showcase-modal{
+            position:fixed;inset:0;z-index:1000;
+            background:rgba(10,18,40,0.92);
+            backdrop-filter:blur(8px);
+            display:none;flex-direction:column;
+            animation:modalIn 0.3s ease;
+        }
+        #showcase-modal.open{display:flex;}
+        @keyframes modalIn{from{opacity:0;transform:scale(0.97)}to{opacity:1;transform:scale(1)}}
+        #modal-bar{
+            display:flex;align-items:center;justify-content:space-between;
+            padding:10px 20px;
+            background:rgba(15,31,61,0.95);
+            border-bottom:1px solid rgba(255,255,255,0.1);
+            flex-shrink:0;
+        }
+        #modal-title-area{display:flex;flex-direction:column;gap:2px;}
+        #modal-title{font-family:'DM Serif Display',serif;font-size:15px;color:rgba(255,255,255,0.92);}
+        #modal-subtitle{font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:0.06em;}
+        #modal-actions{display:flex;align-items:center;gap:10px;}
+        #modal-open-btn{
+            background:var(--teal);color:#fff;
+            font-size:11px;font-weight:600;letter-spacing:0.05em;
+            padding:5px 14px;border-radius:99px;text-decoration:none;
+            border:none;cursor:pointer;
+            transition:background 0.2s;
+        }
+        #modal-open-btn:hover{background:var(--teal-lt);}
+        #modal-close-btn{
+            width:32px;height:32px;border-radius:50%;
+            background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+            color:rgba(255,255,255,0.8);font-size:16px;cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            transition:background 0.2s;
+        }
+        #modal-close-btn:hover{background:rgba(255,255,255,0.2);}
+        #modal-iframe-wrap{flex:1;overflow:hidden;position:relative;}
+        #modal-loading{
+            position:absolute;inset:0;
+            display:flex;flex-direction:column;align-items:center;justify-content:center;
+            background:rgba(10,18,40,0.9);gap:14px;
+            z-index:2;transition:opacity 0.4s;
+        }
+        #modal-loading.done{opacity:0;pointer-events:none;}
+        .loading-spinner{width:36px;height:36px;border:3px solid rgba(42,144,144,0.3);border-top-color:var(--teal);border-radius:50%;animation:spin 0.9s linear infinite;}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        #modal-loading p{font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:0.06em;}
+        #showcase-iframe{width:100%;height:100%;border:none;display:block;}
+
+        /* COURSES */
+        .courses-grid{display:flex;flex-direction:column;gap:7px;margin-top:4px;}
+        .course-item{display:flex;gap:12px;align-items:flex-start;padding:9px 12px;background:rgba(26,107,107,0.06);border-radius:9px;border-left:3px solid var(--teal);}
+        .course-year{font-size:11px;font-weight:800;color:var(--amber);letter-spacing:0.06em;flex-shrink:0;padding-top:1px;}
+        .course-name{font-size:12px;font-weight:500;color:var(--text);line-height:1.4;}
+        .course-org{font-size:11px;color:var(--muted);margin-top:2px;}
+
+        /* PUBLICATIONS */
+        .pub-card{padding:14px;background:rgba(15,31,61,0.04);border-radius:10px;border-left:3px solid var(--navy);}
+        .pub-type{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);background:rgba(201,124,46,0.1);padding:2px 8px;border-radius:99px;display:inline-block;margin-bottom:5px;}
+        .pub-journal{font-size:11px;color:var(--teal);font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:5px;}
+        .pub-title{font-size:13px;font-weight:600;color:var(--navy);line-height:1.45;}
+        .pub-doi{font-size:11px;color:var(--muted);margin-top:6px;}
+        .pub-doi a{color:var(--teal);}
+
+        /* AWARDS */
+        .awards-row{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+        .award-item{display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:rgba(201,124,46,0.07);border-radius:9px;border-left:3px solid var(--amber);}
+        .award-year{font-size:11px;font-weight:800;color:var(--amber);flex-shrink:0;padding-top:2px;}
+        .award-title{font-size:13px;font-weight:600;color:var(--navy);}
+        .award-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+        .section-divider-mini{height:1px;background:var(--cream-dk);margin:14px 0;}
+
+        /* CTA */
+        .cta-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px;}
+        .cta-btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;letter-spacing:0.04em;padding:10px 24px;border-radius:99px;text-decoration:none;transition:all 0.2s;border:2px solid transparent;}
+        .cta-primary{background:var(--teal);color:#fff;border-color:var(--teal);}
+        .cta-primary:hover{background:var(--teal-lt);border-color:var(--teal-lt);color:#fff;text-decoration:none;}
+        .cta-secondary{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.9);border-color:rgba(255,255,255,0.3);}
+        .cta-secondary:hover{background:var(--amber);border-color:var(--amber);color:#fff;text-decoration:none;}
+
+        /* GENERAL */
+        .step p{margin:10px 0 0;}
+        .step ul{padding-left:18px;margin:6px 0;}
+        .step ul li{margin-bottom:5px;font-size:13px;line-height:1.6;}
+        a{color:var(--teal);font-weight:500;text-decoration:none;}
+        a:hover{color:var(--amber);text-decoration:underline;}
+
+        /* LAYOUT */
+        .lefty{width:36vw;margin-left:5vw;}
+        .righty{width:36vw;margin-left:59vw;}
+        .centered{width:44vw;margin:0 auto;}
+        .fully{width:100%;}
+        .fully > div.chapter-content{border-radius:0 !important;}
+        .hidden{visibility:hidden;}
+        @media(max-width:750px){.centered,.lefty,.righty,.fully{width:92vw !important;margin:0 auto !important;}}
+
+        /* FOOTER */
+        #footer{width:100%;padding:26px 20px;text-align:center;font-size:12px;color:rgba(255,255,255,0.42);background:rgba(15,31,61,0.9);backdrop-filter:blur(8px);position:relative;z-index:5;line-height:1.9;}
+        #footer a{color:rgba(255,255,255,0.6);}
+        #footer a:hover{color:var(--amber);}
+
+        /* SCROLL HINT */
+        #scroll-hint{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);z-index:20;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:1;transition:opacity 0.7s;pointer-events:none;}
+        #scroll-hint.gone{opacity:0;}
+        #scroll-hint span{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);}
+        .hint-arrow{width:28px;height:28px;border:1.5px solid rgba(255,255,255,0.35);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:bob 1.9s ease-in-out infinite;}
+        .hint-arrow::after{content:'▾';color:rgba(255,255,255,0.55);font-size:13px;}
+        @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+        /* ── LINKEDIN PROFILE CARD ── */
+        .li-profile { margin: -22px -28px -26px; }
+        .li-body { padding: 24px 22px 22px; }
+
+        /* Avatar row */
+        .li-avatar-row {
+            display: flex; align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px; margin-bottom: 16px;
+        }
+        .li-avatar-wrap {
+            width: 88px; height: 88px; border-radius: 50%;
+            border: 3px solid var(--cream-dk);
+            background: var(--cream-dk);
+            overflow: hidden; flex-shrink: 0;
+            box-shadow: 0 3px 12px rgba(15,31,61,0.15);
+            outline: 3px solid var(--teal);
+            outline-offset: 2px;
+        }
+        .li-avatar { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+        .li-top-actions { display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap; justify-content: flex-end; padding-top: 4px; }
+        .li-btn {
+            font-size: 12px; font-weight: 700; letter-spacing: 0.05em;
+            padding: 7px 18px; border-radius: 99px; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 5px;
+            transition: all 0.18s; border: 2px solid transparent; white-space: nowrap;
+        }
+        .li-btn-primary { background: var(--teal); color: #fff; border-color: var(--teal); }
+        .li-btn-primary:hover { background: var(--teal-lt); border-color: var(--teal-lt); color: #fff; text-decoration: none; }
+        .li-btn-ghost { background: transparent; color: var(--navy); border-color: var(--navy); }
+        .li-btn-ghost:hover { background: var(--navy); color: #fff; text-decoration: none; }
+
+        /* Info */
+        .li-name { font-family: 'DM Serif Display', serif; font-size: clamp(18px,2.8vw,24px); color: var(--navy); margin: 0 0 4px; }
+        .li-headline { font-size: 12px; font-weight: 600; color: var(--teal); letter-spacing: 0.04em; margin-bottom: 4px; }
+        .li-location { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+        .li-summary { font-size: 13px; color: var(--text); line-height: 1.65; margin: 0; }
+        .li-divider { height: 1px; background: var(--cream-dk); margin: 14px 0; }
+        .li-stats { display: flex; }
+        .li-stat { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8px 4px; text-align: center; border-right: 1px solid var(--cream-dk); }
+        .li-stat:last-child { border-right: none; }
+        .li-stat-num { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--navy); line-height: 1; }
+        .li-stat-lbl { font-size: 10px; color: var(--muted); margin-top: 3px; letter-spacing: 0.04em; }
+        .li-links { display: flex; flex-direction: column; gap: 5px; }
+        .li-link { font-size: 12px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+        .li-link:hover { color: var(--teal); }
+
+        /* MAP TOUCH FIX */
+        .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan,
+        .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan .mapboxgl-canvas{touch-action:unset;}
+    </style>
+</head>
+<body>
+
+<!-- Progress nav -->
+<nav id="progress-nav">
+    <span class="nav-name">Muhammad Rifqy</span>
+    <span class="nav-sep">·</span>
+    <span class="nav-section" id="nav-section-label">Geographical Resumé</span>
+    <button id="nav-toggle-btn" onclick="toggleNavPanel()">≡ Sections</button>
+</nav>
+<div id="progress-bar-track"><div id="progress-bar-fill"></div></div>
+
+<!-- Dropdown nav -->
+<div id="nav-panel">
+    <span class="nav-panel-label">Jump to section</span>
+    <div class="nav-panel-group" id="nav-links-container"></div>
+</div>
+
+<!-- Scroll hint -->
+<div id="scroll-hint"><span>Scroll</span><div class="hint-arrow"></div></div>
+
+<div id="map"></div>
+
+<!-- Inset map -->
+<div id="inset-container">
+    <button id="inset-toggle" onclick="toggleInset()">
+        <span class="arrow">▲</span> Overview Map
+    </button>
+    <div id="mapInset"></div>
+</div>
+
+<div id="story"></div>
+
+<!-- Showcase Modal -->
+<div id="showcase-modal">
+    <div id="modal-bar">
+        <div id="modal-title-area">
+            <div id="modal-title">Project</div>
+            <div id="modal-subtitle">Loading…</div>
+        </div>
+        <div id="modal-actions">
+            <a id="modal-open-btn" href="#" target="_blank">↗ Open in new tab</a>
+            <button id="modal-close-btn" onclick="closeShowcase()">✕</button>
+        </div>
+    </div>
+    <div id="modal-iframe-wrap">
+        <div id="modal-loading">
+            <div class="loading-spinner"></div>
+            <p>Loading project…</p>
+        </div>
+        <iframe id="showcase-iframe" src="" title="Project Showcase"></iframe>
+    </div>
+</div>
+
+<script src="./config.js"></script>
+<script>
+/* ─── Nav sections ─── */
+var navSections = [
+    {label:'About Me',id:'aboutme'},
+    {label:'Skills',id:'skills'},
+    {label:'Education',id:'education-sec'},
+    {label:'Work Experience',id:'experience-sec'},
+    {label:'Showcase',id:'showcase-sec'},
+    {label:'Courses',id:'courses-sec'},
+    {label:'Publications',id:'research-sec'},
+    {label:'Awards & Projects',id:'awards-projects'},
+    {label:'Portfolio & CV',id:'portfolio'},
+];
+var sectionLabels = {
+    'aboutme':'About Me','skills':'Skills & Tools',
+    'education-sec':'Education','education':'Education',
+    'experience-sec':'Work Experience','work-all':'Work Experience',
+    'showcase-sec':'Showcase','showcase':'Showcase',
+    'courses-sec':'Courses','courses':'Courses & Certifications',
+    'research-sec':'Publications','pub1':'Publications',
+    'awards-projects':'Awards & Projects','portfolio':'Portfolio & CV'
 };
+
+/* ─── Vertical tab switcher ─── */
+function switchTab(event, group, panelId, lng, lat, zoom) {
+    var wrap = event.currentTarget.closest('.vtab-wrap');
+    if (!wrap) return;
+    wrap.querySelectorAll('.vtab-btn').forEach(function(b){ b.classList.remove('active'); });
+    wrap.querySelectorAll('.vtab-panel').forEach(function(p){ p.classList.remove('active'); });
+    event.currentTarget.classList.add('active');
+    var panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+    if (typeof lng !== 'undefined' && typeof map !== 'undefined') {
+        map.flyTo({center:[lng, lat], zoom:zoom||14, pitch:45, bearing:0, duration:1600});
+        if (typeof marker !== 'undefined') marker.setLngLat([lng, lat]);
+        // Walk up to the .step and update its coord badge
+        var el = wrap;
+        while (el && !el.classList.contains('step')) el = el.parentElement;
+        if (el) {
+            var coordEl = el.querySelector('.card-coord');
+            if (coordEl) coordEl.textContent = '◉  ' + formatCoord([lng, lat]);
+        }
+    }
+}
+
+/* ─── Showcase modal ─── */
+function openShowcase(url, title, subtitle) {
+    var modal   = document.getElementById('showcase-modal');
+    var iframe  = document.getElementById('showcase-iframe');
+    var loading = document.getElementById('modal-loading');
+    var openBtn = document.getElementById('modal-open-btn');
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-subtitle').textContent = subtitle;
+    openBtn.href = url;
+    loading.classList.remove('done');
+    iframe.src = '';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    iframe.onload = function() { loading.classList.add('done'); };
+    setTimeout(function(){ iframe.src = url; }, 80);
+}
+function closeShowcase() {
+    var modal  = document.getElementById('showcase-modal');
+    var iframe = document.getElementById('showcase-iframe');
+    modal.classList.remove('open');
+    iframe.src = '';
+    document.body.style.overflow = '';
+}
+// Close on Escape
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeShowcase(); });
+
+/* ─── Inset toggle ─── */
+function toggleInset(){
+    var inset = document.getElementById('mapInset');
+    var btn   = document.getElementById('inset-toggle');
+    var collapsed = inset.classList.toggle('hidden-inset');
+    btn.classList.toggle('collapsed', collapsed);
+}
+
+/* ─── Nav panel toggle ─── */
+function toggleNavPanel(){
+    var panel = document.getElementById('nav-panel');
+    var btn   = document.getElementById('nav-toggle-btn');
+    var open  = panel.classList.toggle('open');
+    btn.textContent = open ? '✕ Close' : '≡ Sections';
+}
+
+/* ─── Fly to location (loc-btn) ─── */
+function flyToLocation(lng, lat, zoom) {
+    document.querySelectorAll('.loc-btn').forEach(function(b){ b.classList.remove('active-loc'); });
+    if (event && event.currentTarget) event.currentTarget.classList.add('active-loc');
+    map.flyTo({center:[lng,lat], zoom:zoom||15, pitch:45, bearing:0, duration:1800});
+    if(typeof marker !== 'undefined') marker.setLngLat([lng,lat]);
+}
+
+/* ─── Build nav links ─── */
+function buildNavLinks(){
+    var c = document.getElementById('nav-links-container');
+    navSections.forEach(function(s){
+        var a = document.createElement('a'); a.textContent = s.label;
+        a.setAttribute('data-id', s.id); a.href = '#';
+        a.onclick = function(e){
+            e.preventDefault();
+            var el = document.getElementById(s.id);
+            if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+            toggleNavPanel();
+        };
+        c.appendChild(a);
+    });
+}
+
+/* ─── Coordinate formatter ─── */
+function formatCoord(center){
+    var lat = Math.abs(center[1]).toFixed(3)+'° '+(center[1]>=0?'N':'S');
+    var lng = Math.abs(center[0]).toFixed(3)+'° '+(center[0]>=0?'E':'W');
+    return lat+' · '+lng;
+}
+
+/* ─── Map helpers ─── */
+var initLoad = true;
+var layerTypes = {'fill':['fill-opacity'],'line':['line-opacity'],'circle':['circle-opacity','circle-stroke-opacity'],'symbol':['icon-opacity','text-opacity'],'raster':['raster-opacity'],'fill-extrusion':['fill-extrusion-opacity'],'heatmap':['heatmap-opacity']};
+var alignments = {'left':'lefty','center':'centered','right':'righty','full':'fully'};
+function getLayerPaintType(layer){ return layerTypes[map.getLayer(layer).type]; }
+function setLayerOpacity(layer){
+    var props = getLayerPaintType(layer.layer);
+    props.forEach(function(prop){
+        if(layer.duration) map.setPaintProperty(layer.layer,prop+"-transition",{"duration":layer.duration});
+        map.setPaintProperty(layer.layer,prop,layer.opacity,{});
+    });
+}
+
+/* ─── Build story DOM ─── */
+var story = document.getElementById('story');
+var features = document.createElement('div'); features.setAttribute('id','features');
+
+// Header
+var header = document.createElement('div');
+if(config.title||config.subtitle||config.byline){
+    var inner=document.createElement('div'); inner.classList.add('header-inner');
+    var badge=document.createElement('div'); badge.classList.add('coord-badge');
+    badge.innerText='0.000° N · 117.970° E · Riau, Indonesia';
+    inner.appendChild(badge);
+    if(config.title){var t=document.createElement('h1');t.innerText=config.title;inner.appendChild(t);}
+    if(config.subtitle){var s=document.createElement('h2');s.innerText=config.subtitle;inner.appendChild(s);}
+    if(config.byline){var b=document.createElement('p');b.innerText=config.byline;inner.appendChild(b);}
+    header.appendChild(inner); header.setAttribute('id','header'); story.appendChild(header);
+}
+
+// Chapters
+config.chapters.forEach(function(record, idx){
+    var container=document.createElement('div');
+    var chapter=document.createElement('div'); chapter.classList.add('chapter-content');
+    var isFull=(record.alignment==='full');
+    if(isFull) chapter.classList.add('divider-card');
+
+    var body=document.createElement('div'); body.classList.add('card-body');
+
+    if(!isFull && record.id !== 'aboutme'){
+        var coord=document.createElement('div'); coord.classList.add('card-coord');
+        coord.textContent = '◉  ' + formatCoord(record.location.center);
+        body.appendChild(coord);
+    }
+    if(record.title){var tt=document.createElement('h1');tt.innerText=record.title;body.appendChild(tt);}
+    if(record.subtitle){var ss=document.createElement('h2');ss.innerText=record.subtitle;body.appendChild(ss);}
+    if(record.sectiontitle){var st=document.createElement('h3');st.innerText=record.sectiontitle;body.appendChild(st);}
+    if(record.description){var desc=document.createElement('p');desc.innerHTML=record.description;body.appendChild(desc);}
+
+    if(isFull){
+        var acc=document.createElement('div'); acc.classList.add('divider-accent');
+        var hint=document.createElement('span'); hint.classList.add('scroll-hint-label'); hint.innerText='↓ scroll to explore';
+        Array.from(body.children).forEach(function(c){ chapter.appendChild(c); });
+        chapter.appendChild(acc); chapter.appendChild(hint);
+    } else {
+        if(record.image && record.id !== 'aboutme'){
+            var frame=document.createElement('div'); frame.classList.add('img-frame');
+            var img=new Image(); img.src=record.image; img.alt=record.title||'';
+            frame.appendChild(img); chapter.appendChild(frame);
+        }
+        chapter.appendChild(body);
+    }
+
+    container.setAttribute('id',record.id); container.classList.add('step');
+    if(idx===0) container.classList.add('active');
+    container.classList.add(isFull?'type-full':record.alignment==='center'?'type-center':'type-side');
+    container.appendChild(chapter);
+    container.classList.add(alignments[record.alignment]||'centered');
+    if(record.hidden) container.classList.add('hidden');
+    features.appendChild(container);
+});
+
+story.appendChild(features);
+
+if(config.footer){
+    var footer=document.createElement('div');
+    var fp=document.createElement('p'); fp.innerHTML=config.footer;
+    footer.appendChild(fp); footer.setAttribute('id','footer'); story.appendChild(footer);
+}
+
+buildNavLinks();
+
+/* ─── Mapbox ─── */
+mapboxgl.accessToken = config.accessToken;
+var transformRequest = function(url){ return {url:url+(url.indexOf("?")!==-1?"&":"?")+"pluginName=scrollytellingV2"}; };
+var map = new mapboxgl.Map({
+    container:'map', style:config.style,
+    center:config.chapters[0].location.center, zoom:config.chapters[0].location.zoom,
+    bearing:config.chapters[0].location.bearing, pitch:config.chapters[0].location.pitch,
+    interactive:false, transformRequest:transformRequest, projection:config.projection
+});
+
+if(config.inset){
+    var insetMap = new mapboxgl.Map({
+        container:'mapInset', style:'mapbox://styles/mapbox/dark-v10',
+        center:config.chapters[0].location.center, zoom:3,
+        hash:false, interactive:false, attributionControl:false
+    });
+}
+if(config.showMarkers){
+    var marker=new mapboxgl.Marker({color:config.markerColor});
+    marker.setLngLat(config.chapters[0].location.center).addTo(map);
+}
+
+var scroller=scrollama(); var totalSteps=config.chapters.length;
+
+function addLineLayer(id,coords){
+    map.addLayer({'id':id,'type':'line','source':{'type':'geojson','data':{'type':'Feature','properties':{},'geometry':{'type':'Polygon','coordinates':[coords]}}},'paint':{'line-color':'#2a9090','line-width':3,'line-opacity':0.9}});
+}
+
+map.on("load",function(){
+    if(config.use3dTerrain){
+        map.addSource('mapbox-dem',{'type':'raster-dem','url':'mapbox://mapbox.mapbox-terrain-dem-v1','tileSize':512,'maxzoom':14});
+        map.setTerrain({'source':'mapbox-dem','exaggeration':1.5});
+        map.addLayer({'id':'sky','type':'sky','paint':{'sky-type':'atmosphere','sky-atmosphere-sun':[0.0,0.0],'sky-atmosphere-sun-intensity':15}});
+    }
+    addLineLayer('geo',[[110.3766004532822,-7.766082457581732,0],[110.3765306727721,-7.766331641059636,0],[110.376612631426,-7.766364478775635,0],[110.376587838369,-7.7665880406623,0],[110.3779741819949,-7.767037719066499,0],[110.3783842142167,-7.765932955053766,0],[110.3774098744768,-7.765628642458327,0],[110.3772142459672,-7.766135537704328,0],[110.3770523862429,-7.766073943319044,0],[110.3769653000529,-7.766200579516181,0],[110.3766004532822,-7.766082457581732,0]]);
+    addLineLayer('p3e',[[110.337299182237,-7.760445903067198,0],[110.3382432253082,-7.76075846253265,0],[110.3383493347375,-7.760669154879038,0],[110.3383832854159,-7.760565469571945,0],[110.3376809437043,-7.760339541319354,0],[110.3373712326607,-7.760240313658558,0],[110.337299182237,-7.760445903067198,0]]);
+    addLineLayer('smansa',[[101.4361203011511,1.619378944637818,0],[101.4356802714838,1.619530397134317,0],[101.4356590118179,1.619599120675148,0],[101.4356010108467,1.619622589150768,0],[101.4356027270417,1.619632204955576,0],[101.435606474137,1.619644257147693,0],[101.4356161347372,1.619668499717893,0],[101.4356258590153,1.619692902133105,0],[101.4356292157375,1.619717402693545,0],[101.435633140558,1.619727273232733,0],[101.4356348357371,1.619739616060114,0],[101.4356344734816,1.619749502155177,0],[101.4356342920589,1.619754454836982,0],[101.435408918034,1.619820292484073,0],[101.4353319394978,1.619844029645165,0],[101.4353359258852,1.619947586379037,0],[101.4350323201374,1.620015569456026,0],[101.4350152592434,1.619972319377663,0],[101.4347740083417,1.619902796964626,0],[101.43465129999,1.619878060356943,0],[101.4347129260244,1.619762697896724,0],[101.4349371598732,1.619348767052225,0],[101.4351511875626,1.619143611379217,0],[101.4355707185414,1.618836015392801,0],[101.4357584721064,1.618960202372916,0],[101.4361203011511,1.619378944637818,0]]);
+    addLineLayer('bunderan',[[101.4473891878369,0.5179402170874262],[101.4473623769401,0.5179389000062854],[101.4473358242469,0.5179349614470758],[101.44730978547433,0.5179284393402807],[101.44728451139002,0.5179193964973615],[101.44726024539722,0.5179079200058496],[101.44723722119075,0.5178941203906449],[101.4472156605063,0.5178781305495999],[101.44719577098505,0.5178601044736407],[101.44717774417403,0.5178402157637497],[101.44716175368123,0.5178186559590918],[101.4471479535038,0.5177956326923877],[101.44713647654504,0.5177713676902962],[101.44712743333427,0.5177460946380648],[101.44712091096257,0.5177200569290129],[101.44711697224388,0.5176935053205198],[101.44711565511017,0.5176666955190953],[101.44711697224618,0.517639885717784],[101.44712091096707,0.5176133341096267],[101.44712743334082,0.5175872964011199],[101.44713647655338,0.5175620233496222],[101.4471479535136,0.5175377583484245],[101.44716175369211,0.5175147350827402],[101.44717774418561,0.5174931752791888],[101.44719577099687,0.5174732865704487],[101.44721566051786,0.5174552604956404],[101.44723722120163,0.5174392706557019],[101.44726024540702,0.517425471041517],[101.44728451139837,0.5174139945508991],[101.44730978548088,0.5174049517087135],[101.44733582425144,0.5173984296024636],[101.4473623769424,0.5173944910435897],[101.4473891878369,0.5173931739625622],[101.44741599873143,0.5173944910435897],[101.4474425514224,0.5173984296024636],[101.44746859019293,0.5174049517087135],[101.44749386427547,0.5174139945508991],[101.44751813026681,0.517425471041517],[101.44754115447219,0.5174392706557019],[101.44756271515597,0.5174552604956404],[101.44758260467697,0.5174732865704487],[101.44760063148823,0.5174931752791888],[101.44761662198172,0.5175147350827402],[101.4476304221602,0.5175377583484245],[101.44764189912046,0.5175620233496222],[101.44765094233298,0.5175872964011199],[101.44765746470674,0.5176133341096267],[101.44766140342766,0.517639885717784],[101.44766272056364,0.5176666955190953],[101.44766140342995,0.5176935053205198],[101.44765746471127,0.5177200569290129],[101.44765094233955,0.5177460946380648],[101.4476418991288,0.5177713676902962],[101.44763042217001,0.5177956326923877],[101.44761662199261,0.5178186559590918],[101.4476006314998,0.5178402157637497],[101.44758260468876,0.5178601044736407],[101.44756271516754,0.5178781305495999],[101.44754115448309,0.5178941203906449],[101.44751813027662,0.5179079200058496],[101.44749386428381,0.5179193964973615],[101.44746859019949,0.5179284393402807],[101.4474425514269,0.5179349614470758],[101.44741599873373,0.5179389000062854],[101.4473891878369,0.5179402170874262]]);
+    addLineLayer('rawapening',[[110.4291239213461,-7.287548196370764],[110.4291239213461,-7.27229093148415],[110.41104214118786,-7.27229093148415],[110.41104214118786,-7.287548196370764],[110.4291239213461,-7.287548196370764]]);
+
+    if(config.inset) map.on('move',getInsetBounds);
+
+    scroller.setup({step:'.step',offset:0.5,progress:true})
+    .onStepEnter(async function(response){
+        var cur=config.chapters.findIndex(function(c){return c.id===response.element.id;});
+        var chapter=config.chapters[cur];
+        response.element.classList.add('active');
+        document.querySelectorAll('.loc-btn').forEach(function(b){b.classList.remove('active-loc');});
+        map[chapter.mapAnimation||'flyTo'](chapter.location);
+        document.getElementById('nav-section-label').innerText=sectionLabels[chapter.id]||chapter.title||'';
+        document.getElementById('progress-bar-fill').style.width=Math.round(((cur+1)/totalSteps)*100)+'%';
+        if(cur>0) document.getElementById('scroll-hint').classList.add('gone');
+        document.querySelectorAll('.nav-panel a').forEach(function(a){a.classList.remove('active-link');});
+        var matchLink=document.querySelector('.nav-panel a[data-id="'+chapter.id+'"]');
+        if(!matchLink){
+            navSections.forEach(function(ns){
+                if(sectionLabels[chapter.id]===ns.label){
+                    var l=document.querySelector('.nav-panel a[data-id="'+ns.id+'"]');
+                    if(l) matchLink=l;
+                }
+            });
+        }
+        if(matchLink) matchLink.classList.add('active-link');
+        if(config.inset) insetMap.flyTo({center:chapter.location.center,zoom:chapter.location.zoom<6?1:3,duration:800});
+        if(config.showMarkers) marker.setLngLat(chapter.location.center);
+        if(chapter.onChapterEnter.length>0) chapter.onChapterEnter.forEach(setLayerOpacity);
+        if(chapter.callback) window[chapter.callback]();
+        if(chapter.rotateAnimation){
+            map.once('moveend',function(){
+                var b=map.getBearing();
+                map.rotateTo(b+180,{duration:30000,easing:function(t){return t;}});
+            });
+        }
+    })
+    .onStepExit(function(response){
+        var chapter=config.chapters.find(function(c){return c.id===response.element.id;});
+        response.element.classList.remove('active');
+        if(chapter.onChapterExit.length>0) chapter.onChapterExit.forEach(setLayerOpacity);
+    });
+});
+
+function getInsetBounds(){
+    var bounds=map.getBounds();
+    var bj={"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[bounds._sw.lng,bounds._sw.lat],[bounds._ne.lng,bounds._sw.lat],[bounds._ne.lng,bounds._ne.lat],[bounds._sw.lng,bounds._ne.lat],[bounds._sw.lng,bounds._sw.lat]]]}}]};
+    if(initLoad){addInsetLayer(bj);initLoad=false;}else updateInsetLayer(bj);
+}
+function addInsetLayer(b){
+    insetMap.addSource('boundsSource',{'type':'geojson','data':b});
+    insetMap.addLayer({'id':'boundsLayer','type':'fill','source':'boundsSource','layout':{},'paint':{'fill-color':'#fff','fill-opacity':0.15}});
+    insetMap.addLayer({'id':'outlineLayer','type':'line','source':'boundsSource','layout':{},'paint':{'line-color':'#c97c2e','line-width':1.5}});
+}
+function updateInsetLayer(b){insetMap.getSource('boundsSource').setData(b);}
+
+document.addEventListener('click',function(e){
+    var panel=document.getElementById('nav-panel');
+    var btn=document.getElementById('nav-toggle-btn');
+    if(panel.classList.contains('open')&&!panel.contains(e.target)&&!btn.contains(e.target)){
+        panel.classList.remove('open'); btn.textContent='≡ Sections';
+    }
+});
+window.addEventListener('resize',scroller.resize);
+</script>
+</body>
+</html>
