@@ -138,7 +138,7 @@ support policy advocacy and programmatic goals.</p>
         </div>
         <span class="edu-gpa">GPA: 3.49 / 4.00</span>
       </div>
-      <div class="tl-deg">S.Si. — Environmental Geography (B.Sc. Equivalent)</div>
+      <div class="tl-deg">S.Si. — Bachelor of Science in Environmental Geography</div>
       <div class="tl-period">Aug 2017 – Nov 2022</div>
       <ul>
         <li>🏅 Riau Province Scholarship Awardee (Penelusuran Bibit Unggul Kemitraan)</li>
@@ -159,7 +159,7 @@ support policy advocacy and programmatic goals.</p>
             alignment: 'full', hidden: false,
             title: 'WORK EXPERIENCE',
             description: 'Field roles across Riau and Yogyakarta',
-            location: { center: [112.0, -2.0], zoom: 5.0, pitch: 40, bearing: 0 },
+            location: { center: [106.799526, -6.2063092], zoom: 5.0, pitch: 40, bearing: 0 },
             mapAnimation: 'flyTo', rotateAnimation: false, callback: '',
             onChapterEnter: [], onChapterExit: []
         },
@@ -170,12 +170,12 @@ support policy advocacy and programmatic goals.</p>
             description: `
 <div class="vtab-wrap">
   <div class="vtab-nav">
-  <button class="vtab-btn active" onclick="switchTab(event,'work','work-ifns',101.4595,0.4922,12)">
+  <button class="vtab-btn active" onclick="switchTab(event,'work','work-ifns',106.799526,-6.2063092,17)">
       <span class="vtab-year">2026–Present</span>
       <span class="vtab-name">Indonesia's FOLU Net Sink 2030</span>
       <span class="vtab-active-dot"></span>
     </button>  
-  <button class="vtab-btn active" onclick="switchTab(event,'work','work-m4cr',101.4595,0.4922,12)">
+  <button class="vtab-btn" onclick="switchTab(event,'work','work-m4cr',101.4595,0.4922,12)">
       <span class="vtab-year">2024–2026</span>
       <span class="vtab-name">M4CR Project</span>
       <span class="vtab-active-dot"></span>
@@ -212,7 +212,7 @@ support policy advocacy and programmatic goals.</p>
       </ul>
     </div>
   <div class="vtab-content">
-    <div id="work-m4cr" class="vtab-panel active">
+    <div id="work-m4cr" class="vtab-panel">
       <div class="vt-header">
         <div>
           <div class="tl-inst">Mangrove For Coastal Resilience (M4CR)</div>
@@ -272,7 +272,7 @@ supporting adaptive management.</li>
         <div>
           <div class="tl-inst">Pusat Pengendalian Pembangunan Ekoregion Jawa</div>
           <div class="tl-loc">D.I. Yogyakarta</div>
-          <img src="https://mamedrifqy.github.io/resume/assets/logo.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="P3E">
+          <img src="https://mamedrifqy.github.io/assets/img/logo.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="P3E">
         </div>
       </div>
       <div class="tl-deg">Student Intern — Land Use Analyst</div>
