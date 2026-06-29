@@ -117,16 +117,15 @@ support policy advocacy and programmatic goals.</p>
         <div>
           <div class="tl-inst">Universitas Riau</div>
           <div class="tl-loc">Riau, Indonesia</div>
-          <img src="https://mamedrifqy.github.io/assets/img/idhN3mkERF_1773677826112.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="UNRI">
+          <img src="https://mamedrifqy.github.io/resume/assets/idhN3mkERF_1773677826112.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="UNRI">
         </div>
-        <span class="edu-gpa">cGPA 4.00/4.00</span>
+        <span class="edu-gpa">GPA: 4.00 / 4.00 (Summa Cum Laude)</span>
       </div>
       <div class="tl-deg">M.M.B. — Master of Disaster Management<br><small>Specialized in Peatland &amp; Coastal Disaster</small></div>
       <div class="tl-period">Aug 2025 – Present</div>
       <ul>
-        <li>Mangrove Conservation, Flood and Abration</li>
-        <li>Forest and Peatland Fires, Peatland Ecological Disaster Studies</li>
-        <li>Disaster Management Information System and GIS</li>
+        <li><b>Research & Academic Focus:</b> Geostatistical modeling and environmental conservation research, specifically analyzing the intersection of peatland depth, climate anomalies (ENSO), and forest fire dynamics.</li>
+        <li><b>Relevant Coursework:</b> Disaster Management Information Systems & GIS , Forest & Peatland Fires , Peatland Science , Mangrove Conservation , and Climate Change Adaptation & Mitigation.</li>
       </ul>
     </div>
     <div id="edu-ugm" class="vtab-panel">
@@ -137,7 +136,7 @@ support policy advocacy and programmatic goals.</p>
 <img src="https://mamedrifqy.github.io/assets/img/Tipografi.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="UGM">
 
         </div>
-        <span class="edu-gpa">GPA 3.49/4.00</span>
+        <span class="edu-gpa">GPA: 3.49 / 4.00</span>
       </div>
       <div class="tl-deg">S.Si. — Environmental Geography (B.Sc. Equivalent)</div>
       <div class="tl-period">Aug 2017 – Nov 2022</div>
@@ -171,8 +170,13 @@ support policy advocacy and programmatic goals.</p>
             description: `
 <div class="vtab-wrap">
   <div class="vtab-nav">
-    <button class="vtab-btn active" onclick="switchTab(event,'work','work-m4cr',101.4595,0.4922,12)">
-      <span class="vtab-year">2024–</span>
+  <button class="vtab-btn active" onclick="switchTab(event,'work','work-ifns',101.4595,0.4922,12)">
+      <span class="vtab-year">2026–Present</span>
+      <span class="vtab-name">Indonesia's FOLU Net Sink 2030</span>
+      <span class="vtab-active-dot"></span>
+    </button>  
+  <button class="vtab-btn active" onclick="switchTab(event,'work','work-m4cr',101.4595,0.4922,12)">
+      <span class="vtab-year">2024–2026</span>
       <span class="vtab-name">M4CR Project</span>
       <span class="vtab-active-dot"></span>
     </button>
@@ -189,6 +193,24 @@ support policy advocacy and programmatic goals.</p>
       <span class="vtab-name">P3E Jawa</span>
     </button>
   </div>
+  <div class="vtab-content">
+    <div id="work-ifns" class="vtab-panel active">
+      <div class="vt-header">
+        <div>
+          <div class="tl-inst">Indonesia's FOLU Net Sink 2030</div>
+          <div class="tl-loc">Jakarta, Indonesia</div>
+        </div>
+        <img src="https://mamedrifqy.github.io/resume/assets/Logo_IFNS_2026.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="IFNS">
+      </div>
+      <div class="tl-deg">Forestry Technical Staff for Monitoring, Reporting, and Verification</div>
+      <div class="tl-period">May 2024 – Present &nbsp;·&nbsp; KEMENHUT</div>
+      <ul>
+        <li>Supporting the development of MRV methodology documentation and structural guidance for Indonesia's FOLU Net Sink 2030 program, contributing to forestry sector mitigation reporting frameworks.</li>
+        <li>Assisting in compilation and systematic documentation of technical data related to forestry sector activities and GHG mitigation contributions in alignment with national FOLU Net Sink 2030 targets.</li>
+
+
+      </ul>
+    </div>
   <div class="vtab-content">
     <div id="work-m4cr" class="vtab-panel active">
       <div class="vt-header">
@@ -250,7 +272,7 @@ supporting adaptive management.</li>
         <div>
           <div class="tl-inst">Pusat Pengendalian Pembangunan Ekoregion Jawa</div>
           <div class="tl-loc">D.I. Yogyakarta</div>
-          <img src="https://mamedrifqy.github.io/assets/img/logo.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="P3E">
+          <img src="https://mamedrifqy.github.io/resume/assets/logo.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="P3E">
         </div>
       </div>
       <div class="tl-deg">Student Intern — Land Use Analyst</div>
