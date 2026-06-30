@@ -119,7 +119,7 @@ support policy advocacy and programmatic goals.</p>
           <div class="tl-loc">Riau, Indonesia</div>
           <img src="https://mamedrifqy.github.io/resume/assets/idhN3mkERF_1773677826112.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="UNRI">
         </div>
-        <span class="edu-gpa">GPA: 4.00 / 4.00 (Summa Cum Laude)</span>
+        <span class="edu-gpa">GPA: 4.00 / 4.00</span>
       </div>
       <div class="tl-deg">M.M.B. — Master of Disaster Management<br><small>Specialized in Peatland &amp; Coastal Disaster</small></div>
       <div class="tl-period">Aug 2025 – Present</div>
@@ -178,7 +178,10 @@ support policy advocacy and programmatic goals.</p>
   <button class="vtab-btn" onclick="switchTab(event,'work','work-m4cr',101.4595,0.4922,12)">
       <span class="vtab-year">2024–2026</span>
       <span class="vtab-name">M4CR Project</span>
-      <span class="vtab-active-dot"></span>
+    </button>
+    <button class="vtab-btn" onclick="switchTab(event,'work','work-pardus',101.4473588,0.517668,14)">
+      <span class="vtab-year">2023</span>
+      <span class="vtab-name">CV. Pardus Arogya Samasta</span>
     </button>
     <button class="vtab-btn" onclick="switchTab(event,'work','work-lab',110.37794,-7.76646,17)">
       <span class="vtab-year">2021–24</span>
@@ -203,7 +206,7 @@ support policy advocacy and programmatic goals.</p>
         <img src="https://mamedrifqy.github.io/resume/assets/Logo_IFNS_2026.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="IFNS">
       </div>
       <div class="tl-deg">Forestry Technical Staff for Monitoring, Reporting, and Verification</div>
-      <div class="tl-period">May 2024 – Present &nbsp;·&nbsp; KEMENHUT</div>
+      <div class="tl-period">May 2026 – Present &nbsp;·&nbsp; KEMENHUT</div>
       <ul>
         <li>Supporting the development of MRV methodology documentation and structural guidance for Indonesia's FOLU Net Sink 2030 program, contributing to forestry sector mitigation reporting frameworks.</li>
         <li>Assisting in compilation and systematic documentation of technical data related to forestry sector activities and GHG mitigation contributions in alignment with national FOLU Net Sink 2030 targets.</li>
@@ -221,7 +224,7 @@ support policy advocacy and programmatic goals.</p>
         <img src="https://mamedrifqy.github.io/resume/assets/Logo_M4CR_2024.png" style="height:32px;object-fit:contain;flex-shrink:0;" alt="M4CR">
       </div>
       <div class="tl-deg">Technical Mangrove Rehabilitation Facilitator</div>
-      <div class="tl-period">May 2024 – Present &nbsp;·&nbsp; KEMENHUT–World Bank</div>
+      <div class="tl-period">May 2024 – April 2026 &nbsp; KEMENHUT–World Bank</div>
       <ul>
         <li>Designed a centralized <strong>Shapefile Database System</strong> for <strong>100+ community groups</strong></li>
         <li>Managed spatial analysis for <strong>5,800+ hectares</strong> of rehabilitation areas</li>
@@ -250,6 +253,21 @@ supporting adaptive management.</li>
         <li>Developed landslide analysis using Multinomial Logistic Regression – Regression Kriging</li>
         <li>Prepared geocomputational-geostatistics training module for landslide studies in R</li>
         <li>Courses: Geomorphology, Mineralogy-Petrography, Geomorphological Survey Mapping, Land Survey &amp; Erosion</li>
+      </ul>
+    </div>
+        <div id="work-pardus" class="vtab-panel">
+      <div class="vt-header">
+        <div>
+          <div class="tl-inst">CV. Pardus Arogya Samasta</div>
+          <div class="tl-loc">Jambi</div>
+
+        </div>
+      </div>
+      <div class="tl-deg">GIS Staff</div>
+      <div class="tl-period">May 2023 - Oct 2023</div>
+      <ul>
+        <li>Produced watershed (DAS) maps following national cartographic standards; collected, analyzed, and interpreted geographic data for final map, graphics, and report outputs.</li>
+        <li>Applied remote sensing techniques for watershed boundary mapping and land cover analysis.</li>
       </ul>
     </div>
     <div id="work-xr" class="vtab-panel">
